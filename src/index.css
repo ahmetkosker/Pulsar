@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media (min-height: 100vh) {
+  footer.hidden {
+    display: absolute;
+  }
+}
+
+html {
+  font-family: "Montserrat", sans-serif;
+}
