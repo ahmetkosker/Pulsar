@@ -103,6 +103,7 @@ function AddBlog() {
             onChange={handleChange}
             rows="4"
             className="border p-2 w-full rounded-md"
+            maxLength={700}
           />
         </div>
         <div>

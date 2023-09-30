@@ -1,27 +1,49 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Aside from '../components/Home/Aside'
 import { useNavigate } from 'react-router-dom'
 import { CheckboxImage } from '../components/UserCheckBoxes'
+import axios from 'axios'
 
 const Artist = () => {
   const navigate = useNavigate()
 
   const [selectedImages, setSelectedImages] = useState([])
+  const [customerRequestedArtists, setCustomerRequestedArtists] = useState([])
+  const [customerEmail, setCustomerEmail] = useState('')
+  const [customerContent, setCustomerContent] = useState('')
 
-  const handleImageToggle = (imageUrl, isChecked) => {
+  const handleImageToggle = (imageUrl, isChecked, id) => {
     if (isChecked) {
+      setCustomerRequestedArtists([...customerRequestedArtists, id])
       setSelectedImages([...selectedImages, imageUrl])
     } else {
+      setCustomerRequestedArtists(
+        customerRequestedArtists.filter(artistID => artistID !== id)
+      )
       setSelectedImages(selectedImages.filter(image => image !== imageUrl))
     }
   }
 
-  const images = [
-    '/images/egemen.png',
-    '/images/egemen.png',
-    '/images/egemen.png',
-    '/images/egemen.png'
-  ]
+  const [artists, setArtists] = useState([])
+
+  const sendMail = () => {
+    axios
+      .post('https://sendmailtopulsar-zkwsxnxtga-ew.a.run.app', {
+        customerEmail,
+        customerContent,
+        customerAttachment: '',
+        customerRequestedArtists
+      })
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+  }
+
+  useEffect(() => {
+    axios
+      .get('https://getartists-zkwsxnxtga-ew.a.run.app')
+      .then(res => setArtists(res.data))
+      .catch(err => console.log(err))
+  }, [])
 
   return (
     <main className='w-full h-auto px-5 mb-24'>
@@ -34,11 +56,15 @@ const Artist = () => {
               <input
                 type='text'
                 className='w-[684px] bg-[#D9D9D9] h-[57.966px] outline-none rounded-xl'
+                value={customerEmail}
+                onChange={e => setCustomerEmail(e.target.value)}
               />
             </div>
             <div className='mt-3 flex flex-col text-[27.824px] text-black font-normal gap-y-3 '>
               <label>KONU:</label>
               <textarea
+                value={customerContent}
+                onChange={e => setCustomerContent(e.target.value)}
                 type='text'
                 className='w-[684px] bg-[#D9D9D9] h-[198.244px] outline-none rounded-xl'
               />
@@ -46,11 +72,12 @@ const Artist = () => {
             <div className='mt-3 flex flex-col text-[27.824px] text-black font-normal gap-y-3 '>
               <label>PROJEMDE BULUNMASINI İSTEDİĞİM SANATÇILAR:</label>
               <div className='flex justify-around w-full '>
-                {images.map((imageUrl, index) => (
+                {artists.map(artist => (
                   <CheckboxImage
-                    key={index}
-                    imageUrl={imageUrl}
+                    key={artist.docID}
+                    imageUrl={artist.docData.image}
                     onToggle={handleImageToggle}
+                    id={artist.docID}
                   />
                 ))}
               </div>
@@ -58,7 +85,10 @@ const Artist = () => {
                 <img src='/images/leftArrow.png' alt='Left' />
                 <img src='/images/rightArrow.png' alt='right' />
               </div>
-              <div className='flex justify-end items-center mt-4 float-right'>
+              <div
+                className='flex justify-end items-center mt-4 float-right cursor-pointer'
+                onClick={sendMail}
+              >
                 <div className='font-semibold cursor-pointer hover:opacity-50 transition-all'>
                   GÖNDER
                 </div>

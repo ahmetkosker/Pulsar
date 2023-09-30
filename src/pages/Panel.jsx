@@ -20,11 +20,8 @@ const Panel = () => {
   const app = initializeApp(firebaseConfig);
   const storage = getStorage(app);
 
-  const [project, setProject] = useState("");
   const [nameAndSurname, setNameAndSurname] = useState("");
   const [image, setImage] = useState("");
-  const [VAImage, setVAImage] = useState("");
-  const [SASP, setSASP] = useState("");
   const [role, setRole] = useState("");
   const [detail, setDetail] = useState("");
 
@@ -50,15 +47,21 @@ const Panel = () => {
       });
     }
 
-    if (role === "VA" && VAImage) {
-      const imagePath = ref(storage, `VAImage/${uuidv4()}`);
+    if (role === "VA" && VAImages.length) {
+      const responseImages = await Promise.all(
+        VAImages.map(async (image) => {
+          const imagePath = ref(storage, `VAImage/${uuidv4()}`);
 
-      await uploadBytes(imagePath, VAImage).then(async (snapshot) => {
-        VAImageToDB = await getImage(snapshot.metadata.fullPath);
-      });
+          await uploadBytes(imagePath, image).then(async (snapshot) => {
+            VAImageToDB = await getImage(snapshot.metadata.fullPath);
+          });
+          return VAImageToDB;
+        })
+      );
+
       axios
         .post("https://addartist-zkwsxnxtga-ew.a.run.app", {
-          project: VAImageToDB,
+          projects: responseImages,
           nameAndSurname,
           image: imageToDB,
           role: "Visual Artist",
@@ -66,11 +69,11 @@ const Panel = () => {
         })
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
-    } else if (role === "SE" && SASP) {
-      console.log(SASP, nameAndSurname, imageToDB, role, detail);
+    } else if (role === "SE" && spotifyLinks.length) {
+      console.log(spotifyLinks);
       axios
         .post("https://addartist-zkwsxnxtga-ew.a.run.app", {
-          project: SASP,
+          projects: spotifyLinks,
           nameAndSurname,
           image: imageToDB,
           role: "Sound Engineer",
@@ -79,6 +82,41 @@ const Panel = () => {
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
     }
+  };
+  const [spotifyLinks, setSpotifyLinks] = useState([""]);
+
+  const handleAddSpotifyLink = () => {
+    setSpotifyLinks([...spotifyLinks, ""]);
+  };
+
+  const handleSpotifyLinkChange = (index, value) => {
+    const updatedLinks = [...spotifyLinks];
+    updatedLinks[index] = value;
+    setSpotifyLinks(updatedLinks);
+  };
+
+  const handleRemoveSpotifyLink = (index) => {
+    const updatedLinks = [...spotifyLinks];
+    updatedLinks.splice(index, 1);
+    setSpotifyLinks(updatedLinks);
+  };
+
+  const [VAImages, setVAImages] = useState([]);
+  console.log(VAImages);
+  const handleVAImageChange = (index, file) => {
+    const updatedImages = [...VAImages];
+    updatedImages[index] = file;
+    setVAImages(updatedImages);
+  };
+
+  const handleAddVAImage = () => {
+    setVAImages([...VAImages, null]);
+  };
+
+  const handleRemoveVAImage = (index) => {
+    const updatedImages = [...VAImages];
+    updatedImages.splice(index, 1);
+    setVAImages(updatedImages);
   };
 
   return (
@@ -140,36 +178,73 @@ const Panel = () => {
       </div>
       {role === "SE" ? (
         <div className="relative z-0 w-full mb-6 group mt-[38px]">
-          <input
-            type="text"
-            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            placeholder=" "
-            required
-            onChange={(e) => setSASP(e.target.value)}
-            value={SASP}
-          />
-          <label
-            for="floating_email"
-            className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          {spotifyLinks.map((link, index) => (
+            <div key={index} className="relative z-0 w-full mb-6 group">
+              <input
+                type="text"
+                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 peer"
+                placeholder=" "
+                required
+                value={link}
+                onChange={(e) => handleSpotifyLinkChange(index, e.target.value)}
+              />
+              <label className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                Spotify Link {index + 1}
+              </label>
+              <button
+                type="button"
+                className="absolute top-4 right-4 text-red-500 cursor-pointer"
+                onClick={() => handleRemoveSpotifyLink(index)}
+              >
+                Kaldır
+              </button>
+            </div>
+          ))}
+
+          <button
+            type="button"
+            onClick={handleAddSpotifyLink}
+            className="text-blue-600 mt-2 mb-4 font-medium text-sm"
           >
-            Artist Spotify Linki
-          </label>
+            Spotify Linki Ekle
+          </button>
         </div>
       ) : role === "VA" ? (
         <div className="relative z-0 w-full mb-6 group mt-6">
           <label
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            for="file_input"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            htmlFor="file_input"
           >
-            Artist Profil Fotoğrafı
+            Artist Eserleri
           </label>
-          <input
-            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-            id="file_input"
-            type="file"
-            onChange={(e) => setVAImage(e.target.files[0])}
-            accept="image/*"
-          />
+          {VAImages.map((image, index) => (
+            <div key={index} className="relative z-0 w-full mb-6 group">
+              <input
+                type="file"
+                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 peer"
+                placeholder=" "
+                required
+                onChange={(e) => handleVAImageChange(index, e.target.files[0])}
+              />
+              <label className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                Artist Eserleri {index + 1}
+              </label>
+              <button
+                type="button"
+                className="absolute top-4 right-4 text-red-500 cursor-pointer"
+                onClick={() => handleRemoveVAImage(index)}
+              >
+                Kaldır
+              </button>
+            </div>
+          ))}
+          <button
+            type="button"
+            onClick={handleAddVAImage}
+            className="text-blue-600 mt-2 mb-4 font-medium text-sm"
+          >
+            Artist Eser Ekle
+          </button>
         </div>
       ) : (
         ""

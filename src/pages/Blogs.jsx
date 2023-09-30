@@ -42,7 +42,7 @@ const Blogs = () => {
                       test === index
                         ? "w-32 h-32 scale-125 mt-6 ml-5"
                         : "w-32 h-32"
-                    } transition-all origin-bottom-right`}
+                    } transition-all origin-bottom-right object-cover`}
                   />
                   <p
                     className={`font-bold text-lg- ml-5 transition-all ${
