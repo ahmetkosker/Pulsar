@@ -11,3 +11,45 @@
 html {
   font-family: "Montserrat", sans-serif;
 }
+
+.pagination-enter {
+  position: absolute;
+  opacity: 0;
+}
+.pagination-enter-active {
+  position: absolute;
+  opacity: 1;
+  transition: opacity 600ms;
+}
+.pagination-exit {
+  position: absolute;
+  opacity: 1;
+}
+.pagination-exit-active {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 600ms;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #a59719;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #a59719;
+}

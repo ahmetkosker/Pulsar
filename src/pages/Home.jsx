@@ -7,7 +7,7 @@ const Home = () => {
       <section className='max-w-full sm:mt-20 mt-12 flex justify-between'>
         <Aside />
         <div>
-          <img src='/PULSAR.png' alt='banner' className=' w-32' />
+          <img src='/pulsarMainLogo.png' alt='banner' className=' w-32' />
         </div>
       </section>
     </main>

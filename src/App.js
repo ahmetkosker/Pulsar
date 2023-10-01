@@ -10,8 +10,12 @@ import Blogs from "./pages/Blogs";
 import Panel from "./pages/Panel";
 import AddProject from "./pages/AddProject";
 import AddBlog from "./pages/AddBlog";
+import { getAboutTitle } from "./configs/simpleFunctions";
+import PanelLogin from "./pages/PanelLogin";
+import PanelHomepage from "./pages/PanelHomepage";
 
 function App() {
+  getAboutTitle();
   return (
     <div className="min-h-screen">
       <BrowserRouter>
@@ -24,6 +28,8 @@ function App() {
               <Route path="/projects" element={<Projects />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/blogs" element={<Blogs />} />
+              <Route path="/panellogin" element={<PanelLogin />} />
+              <Route path="/panelHomepage" element={<PanelHomepage />} />
               <Route path="/panel" element={<Panel />} />
               <Route path="/addProject" element={<AddProject />} />
               <Route path="/addBlog" element={<AddBlog />} />

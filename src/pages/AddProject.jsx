@@ -1,23 +1,34 @@
 import axios from "axios";
 import { initializeApp } from "firebase/app";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAqTYo9uZKBeaXgz9cRqn1Ov_KGvyrwKCI",
-  authDomain: "pulsar-cloud-services.firebaseapp.com",
-  projectId: "pulsar-cloud-services",
-  storageBucket: "pulsar-cloud-services.appspot.com",
-  messagingSenderId: "391284565114",
-  appId: "1:391284565114:web:f584bc2aa153e4f7f847c3",
-  measurementId: "G-DCECZRZ1J4",
-};
+import { app, auth } from "../configs/firebaseConfig";
+import { onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function AddProject() {
   const [image, setImage] = useState(null);
-  const app = initializeApp(firebaseConfig);
   const storage = getStorage(app);
+
+  const navigation = useNavigate();
+
+  const chechAuthenticate = () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        console.log(uid);
+      } else {
+        navigation("/panellogin");
+      }
+    });
+  };
+
+  useEffect(() => {
+    chechAuthenticate();
+  }, []);
 
   const [formData, setFormData] = useState({
     artistName: "",
@@ -76,12 +87,18 @@ function AddProject() {
         masteringName: formData.masteringName,
         projectImage: imageToDB,
       })
-      .then((res) => alert("Proje başarıyla eklendi."))
-      .catch((err) => alert("Proje eklenirken bir hata oluştu."));
+      .then((res) => {
+        toast.success("Proje başarıyla eklendi.");
+        setTimeout(() => {
+          navigation("/panelHomepage");
+        }, 2000);
+      })
+      .catch((err) => toast.error("Proje eklenirken bir hata oluştu."));
   };
 
   return (
     <div className="container mx-auto p-4">
+      <ToastContainer />
       <h2 className="text-2xl font-bold mb-4">Sanatçı Bilgi Formu</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -149,7 +166,7 @@ function AddProject() {
         </div>
         <div>
           <label htmlFor="lyricsName" className="block font-medium">
-            Şarkı Sözleri Adı:
+            Söz Yazarı Adı:
           </label>
           <input
             type="text"
