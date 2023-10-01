@@ -67,6 +67,13 @@ const Artist = () => {
       </main>
     );
 
+
+  if (artists === null) return (
+    <main className="w-full h-screen flex justify-center items-center font-semibold text-2xl text-[#A59719]">
+      Loading...
+    </main>
+  )
+
   return (
     <main className="w-full h-auto px-5">
       <section className="max-w-full sm:mt-20 mt-12 flex justify-between">
@@ -143,6 +150,7 @@ const Artist = () => {
             src="/pulsarMainLogo.png"
             alt="banner"
             className="3xl:w-96 cursor-pointer w-60"
+
           />
 
           <div className="3xl:w-96 3xl:text-3xl w-60 text-xl font-bold">
