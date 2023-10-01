@@ -5,29 +5,27 @@ import { v4 as uuidv4 } from "uuid";
 import { app, auth } from "../configs/firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-
-
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function AddBlog() {
   const storage = getStorage(app);
   const [image, setImage] = useState(null);
-  const navigation = useNavigate()
+  const navigation = useNavigate();
 
   const chechAuthenticate = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
-        console.log(uid)
+        console.log(uid);
       } else {
-        navigation('/panellogin')
+        navigation("/panellogin");
       }
     });
-  }
-
+  };
 
   useEffect(() => {
-    chechAuthenticate()
-  }, [])
+    chechAuthenticate();
+  }, []);
 
   const [formData, setFormData] = useState({
     blogPostImageURL: "",
@@ -70,12 +68,18 @@ function AddBlog() {
         blogPostContent: formData.blogPostContent,
         blogPostAuthor: formData.blogPostAuthor,
       })
-      .then((res) => alert("Blog yazısı başarıyla eklendi!"))
-      .catch((err) => alert("Blog yazısı eklenirken bir hata oluştu!"));
+      .then((res) => {
+        toast.success("Blog yazısı başarıyla eklendi!");
+        setTimeout(() => {
+          navigation("/panelHomepage");
+        }, 2000);
+      })
+      .catch((err) => toast.error("Blog yazısı eklenirken bir hata oluştu!"));
   };
 
   return (
     <div className="container mx-auto p-4">
+      <ToastContainer />
       <h2 className="text-2xl font-bold mb-4">Blog Yazısı Ekle</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>

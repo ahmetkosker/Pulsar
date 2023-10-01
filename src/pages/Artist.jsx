@@ -3,6 +3,7 @@ import Aside from "../components/Home/Aside";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import SpotifyPlayer from "react-spotify-player";
+import { CSSTransition } from "react-transition-group";
 
 const Artist = () => {
   const navigate = useNavigate();
@@ -46,80 +47,106 @@ const Artist = () => {
     }
   };
 
-  if (artists === null) return (
-    <main className="w-full h-screen flex justify-center items-center font-semibold text-2xl text-[#A59719]">
-      Loading...
-    </main>
-  )
-
+  if (artists === null)
+    return (
+      <main className="w-full h-screen flex justify-center items-center font-semibold text-2xl text-[#A59719]">
+        Loading...
+      </main>
+    );
+  console.log(page);
   return (
     <main className="w-full h-auto px-5 mb-24">
       <section className="max-w-full sm:mt-20 mt-12 flex justify-between">
         <Aside />
         <div className="flex justify-start flex-wrap w-full sm:ml-36 ml-12 gap-x-5 gap-y-10 sm:pt-36 text-center font-extrabold sm:text-xl text-xs pt-20">
           {user ? (
-            page === 1 ? (
-              <section>
-                <div
-                  className={`${trans && "scale-[1.8]"
-                    } flex gap-x-12 items-center transition-all origin-top-left relative -top-32 right-24`}
-                >
-                  <div className="mb-6">
-                    <img
-                      src={user.docData.image}
-                      alt="artist"
-                      className="w-[267px] h-[267px] object-cover"
-                    />
-                  </div>
-
-                  {trans && (
-                    <div
-                      className="flex flex-col text-[10px] gap-y-10 text-[#A59719] "
-                      onWheel={handleWheel}
-                    >
-                      <div className="text-left">
-                        {user.docData.role.toUpperCase()}:  {user.docData.nameAndSurname.toUpperCase()}
-                      </div>
-                      <div className="text-black font-bold w-60 text-[9px] leading-[11px] text-justify">
-                        {user.docData.detail.toUpperCase()}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </section>
-            ) : page === 2 ? (
-              <section
-                className="flex justify-between flex-wrap gap-x-6"
-                onWheel={handleWheel}
+            <div>
+              <CSSTransition
+                in={page === 1}
+                timeout={600}
+                classNames="pagination"
+                unmountOnExit
               >
-                {user.docData.role === "Sound Engineer"
-                  ? user.docData.projects.map((project, index) => {
-                    return (
-                      <div key={index}>
-                        <SpotifyPlayer
-                          uri={project}
-                          size={size}
-                          view={view}
-                          theme={theme}
-                        />
+                <section>
+                  <div
+                    className={`${
+                      trans && "scale-[1.8]"
+                    } flex gap-x-12 items-center transition-all origin-top-left relative -top-32 right-24`}
+                  >
+                    <div className="mb-6">
+                      <img
+                        src={user.docData.image}
+                        alt="artist"
+                        className="w-[267px] h-[267px] object-cover"
+                      />
+                    </div>
+                    <button
+                      className="absolute right-0 top-0 text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-3 py-2 text-center mr-2 mb-2"
+                      onClick={() => setUser(null)}
+                    >
+                      Geri
+                    </button>
+
+                    {trans && (
+                      <div
+                        className="flex flex-col text-[10px] gap-y-10 text-[#A59719] "
+                        onWheel={handleWheel}
+                      >
+                        <div className="text-left">
+                          {user.docData.role.toUpperCase()}:{" "}
+                          {user.docData.nameAndSurname.toUpperCase()}
+                        </div>
+                        <div className="text-black font-bold w-60 text-[9px] leading-[11px] text-justify">
+                          {user.docData.detail.toUpperCase()}
+                        </div>
                       </div>
-                    );
-                  })
-                  : user.docData.projects.map((project, index) => {
-                    return (
-                      <div key={index}>
-                        <img
-                          className="w-52 h-52 object-contain"
-                          src={project}
-                          alt="IMAGE"
-                        />
-                      </div>
-                    );
-                  })}
-              </section>
-            ) : (
-              ""
-            )
+                    )}
+                  </div>
+                </section>
+              </CSSTransition>
+              <CSSTransition
+                in={page === 2}
+                timeout={600}
+                classNames="pagination"
+                unmountOnExit
+              >
+                <section
+                  className="flex justify-between flex-wrap gap-x-6 relative"
+                  onWheel={handleWheel}
+                >
+                  <button
+                    className="absolute right-6 -top-24 text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-3 py-2 text-center mr-2 mb-2"
+                    onClick={() => setPage(1)}
+                  >
+                    Geri
+                  </button>
+                  {user.docData.role === "Sound Engineer"
+                    ? user.docData.projects.map((project, index) => {
+                        return (
+                          <div key={index}>
+                            <SpotifyPlayer
+                              uri={project}
+                              size={size}
+                              view={view}
+                              theme={theme}
+                            />
+                          </div>
+                        );
+                      })
+                    : user.docData.projects.map((project, index) => {
+                        return (
+                          <div key={index}>
+                            <img
+                              className="w-52 h-52 object-contain"
+                              src={project}
+                              alt="IMAGE"
+                            />
+                          </div>
+                        );
+                      })}
+                </section>
+              </CSSTransition>
+            </div>
           ) : (
             artists.map((artist) => {
               return (
@@ -141,9 +168,7 @@ const Artist = () => {
                     />
                   </div>
 
-                  <div
-                    className="hover:opacity-25 duration-200 easy-out transition-opacity"
-                  >
+                  <div className="hover:opacity-25 duration-200 easy-out transition-opacity">
                     <div>{artist.docData.role}</div>
                     <div>{artist.docData.nameAndSurname}</div>
                   </div>

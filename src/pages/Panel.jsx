@@ -6,7 +6,8 @@ import axios from "axios";
 import { app, auth } from "../configs/firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Panel = () => {
   const storage = getStorage(app);
@@ -21,16 +22,16 @@ const Panel = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
-        console.log(uid)
+        console.log(uid);
       } else {
-        navigate('/panellogin')
+        navigate("/panellogin");
       }
     });
-  }
+  };
 
   useEffect(() => {
-    chechAuthenticate()
-  }, [])
+    chechAuthenticate();
+  }, []);
 
   const getImage = async (path) => {
     let itemRef = ref(storage, path);
@@ -74,8 +75,13 @@ const Panel = () => {
           role: "Visual Artist",
           detail,
         })
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
+        .then((res) => {
+          toast.success("Artist başarıyla eklendi.");
+          setTimeout(() => {
+            navigate("/panelHomepage");
+          }, 2000);
+        })
+        .catch((err) => toast.error("Artist eklenirken bir hata oluştu."));
     } else if (role === "SE" && spotifyLinks.length) {
       console.log(spotifyLinks);
       axios
@@ -86,8 +92,13 @@ const Panel = () => {
           role: "Sound Engineer",
           detail,
         })
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
+        .then((res) => {
+          toast.success("Artist başarıyla eklendi.");
+          setTimeout(() => {
+            navigate("/panelHomepage");
+          }, 2000);
+        })
+        .catch((err) => toast.error("Artist eklenirken bir hata oluştu."));
     }
   };
   const [spotifyLinks, setSpotifyLinks] = useState([""]);
@@ -132,6 +143,7 @@ const Panel = () => {
       autocomplete="off"
       onSubmit={handleSave}
     >
+      <ToastContainer />
       <div className="relative z-0 w-full mb-6 group">
         <input
           value={nameAndSurname}
@@ -150,11 +162,11 @@ const Panel = () => {
           value={detail}
           onChange={(e) => setDetail(e.target.value)}
           type="text"
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
           required
         />
-        <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+        <label className="peer-focus:font-medium absolute text-sm text-gray-900 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
           Artist hakkında bilgi
         </label>
       </div>
