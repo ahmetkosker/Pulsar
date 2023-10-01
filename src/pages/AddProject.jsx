@@ -1,14 +1,34 @@
 import axios from "axios";
 import { initializeApp } from "firebase/app";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { app } from "../configs/firebaseConfig";
+import { app, auth } from "../configs/firebaseConfig";
+import { onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 
 function AddProject() {
   const [image, setImage] = useState(null);
   const storage = getStorage(app);
+
+  const navigation = useNavigate()
+
+  const chechAuthenticate = () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        console.log(uid)
+      } else {
+        navigation('/panellogin')
+      }
+    });
+  }
+
+
+  useEffect(() => {
+    chechAuthenticate()
+  }, [])
 
   const [formData, setFormData] = useState({
     artistName: "",
@@ -140,7 +160,7 @@ function AddProject() {
         </div>
         <div>
           <label htmlFor="lyricsName" className="block font-medium">
-            Şarkı Sözleri Adı:
+            Söz Yazarı Adı:
           </label>
           <input
             type="text"

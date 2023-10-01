@@ -78,8 +78,7 @@ const Artist = () => {
                       onWheel={handleWheel}
                     >
                       <div className="text-left">
-                        {user.docData.role.toUpperCase()}:
-                        {user.docData.nameAndSurname.toUpperCase()}
+                        {user.docData.role.toUpperCase()}:  {user.docData.nameAndSurname.toUpperCase()}
                       </div>
                       <div className="text-black font-bold w-60 text-[9px] leading-[11px] text-justify">
                         {user.docData.detail.toUpperCase()}
@@ -110,7 +109,7 @@ const Artist = () => {
                     return (
                       <div key={index}>
                         <img
-                          className="w-52 h-52 object-cover"
+                          className="w-52 h-52 object-contain"
                           src={project}
                           alt="IMAGE"
                         />

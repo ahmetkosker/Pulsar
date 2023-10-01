@@ -1,29 +1,36 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { useState } from "react";
-
-import { initializeApp } from "firebase/app";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import axios from "axios";
+import { app, auth } from "../configs/firebaseConfig";
+import { useNavigate } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAqTYo9uZKBeaXgz9cRqn1Ov_KGvyrwKCI",
-  authDomain: "pulsar-cloud-services.firebaseapp.com",
-  projectId: "pulsar-cloud-services",
-  storageBucket: "pulsar-cloud-services.appspot.com",
-  messagingSenderId: "391284565114",
-  appId: "1:391284565114:web:f584bc2aa153e4f7f847c3",
-  measurementId: "G-DCECZRZ1J4",
-};
 
 const Panel = () => {
-  const app = initializeApp(firebaseConfig);
   const storage = getStorage(app);
+  const navigate = useNavigate();
 
   const [nameAndSurname, setNameAndSurname] = useState("");
   const [image, setImage] = useState("");
   const [role, setRole] = useState("");
   const [detail, setDetail] = useState("");
+
+  const chechAuthenticate = () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        console.log(uid)
+      } else {
+        navigate('/panellogin')
+      }
+    });
+  }
+
+  useEffect(() => {
+    chechAuthenticate()
+  }, [])
 
   const getImage = async (path) => {
     let itemRef = ref(storage, path);
@@ -130,11 +137,11 @@ const Panel = () => {
           value={nameAndSurname}
           onChange={(e) => setNameAndSurname(e.target.value)}
           type="text"
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
           required
         />
-        <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+        <label className="peer-focus:font-medium absolute text-sm text-black dark:text-black duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-black peer-focus:dark:text-black peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
           İsim ve soyisim
         </label>
       </div>

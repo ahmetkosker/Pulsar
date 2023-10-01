@@ -42,7 +42,7 @@ const Projects = () => {
 
                 <div className="w-60 mt-5 group-hover:mt-0 pt-9 group-hover:pt-10 duration-500 text-lg group-hover:h-60 overflow-hidden h-32 bg-[#A59719] transition-opacity rounded-b-3xl text-white text-left px-3">
                   <div className="group-hover:translate-x-4 group-hover:-translate-y-7 w-48 transition-all duration-500">
-                    {project.docData.artistJobTitle}
+                    {project.docData.artistName} - {project.docData.artistJobTitle}
                   </div>
                   <div className="group-hover:opacity-100 duration-500 opacity-0 -mt-2 ml-4 transition-all ease-in-out text-xs font-normal flex flex-col gap-y-1">
                     <div>PRODÜKTÖR: {project.docData.producerName}</div>
