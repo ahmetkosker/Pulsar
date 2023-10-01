@@ -7,7 +7,7 @@ import axios from "axios";
 const Projects = () => {
   const navigate = useNavigate();
 
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState(null);
 
   useEffect(() => {
     axios
@@ -15,11 +15,17 @@ const Projects = () => {
       .then((res) => setProjects(res.data));
   }, []);
 
+  if (projects === null) return (
+    <main className="w-full h-screen flex justify-center items-center font-semibold text-2xl text-[#A59719]">
+      Loading...
+    </main>
+  )
+
   return (
     <main className="w-full h-auto px-5">
       <section className="max-w-full sm:mt-20 mt-12 flex justify-between">
         <Aside />
-        <div className="flex justify-start flex-wrap gap-y-12  w-full sm:ml-36 ml-12 gap-x-5 sm:pt-36 text-center font-extrabold sm:text-xl text-xs pt-20">
+        <div className="flex justify-start flex-wrap relative bottom-36 gap-y-12 w-full sm:ml-36 ml-12 gap-x-5 sm:pt-36 text-center font-extrabold sm:text-xl text-xs pt-20">
           {projects?.map((project) => {
             return (
               <div
@@ -30,7 +36,7 @@ const Projects = () => {
                   <img
                     src={project.docData.projectImage}
                     alt="artist"
-                    className="w-60 h-60 group-hover:translate-y-0.5 transition-all object-cover"
+                    className="w-60 h-60 rounded-t-3xl group-hover:translate-y-0.5 transition-all object-cover"
                   />
                 </div>
 
@@ -54,7 +60,7 @@ const Projects = () => {
         <div>
           <img
             onClick={() => navigate("/")}
-            src="/PULSAR.png"
+            src="/pulsarMainLogo.png"
             alt="banner"
             className="w-44 cursor-pointer"
           />

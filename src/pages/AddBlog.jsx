@@ -1,21 +1,12 @@
 import axios from "axios";
-import { initializeApp } from "firebase/app";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { app } from "../configs/firebaseConfig";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAqTYo9uZKBeaXgz9cRqn1Ov_KGvyrwKCI",
-  authDomain: "pulsar-cloud-services.firebaseapp.com",
-  projectId: "pulsar-cloud-services",
-  storageBucket: "pulsar-cloud-services.appspot.com",
-  messagingSenderId: "391284565114",
-  appId: "1:391284565114:web:f584bc2aa153e4f7f847c3",
-  measurementId: "G-DCECZRZ1J4",
-};
+
 
 function AddBlog() {
-  const app = initializeApp(firebaseConfig);
   const storage = getStorage(app);
   const [image, setImage] = useState(null);
 
