@@ -1,14 +1,33 @@
 import axios from "axios";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { app } from "../configs/firebaseConfig";
+import { app, auth } from "../configs/firebaseConfig";
+import { onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 
 
 function AddBlog() {
   const storage = getStorage(app);
   const [image, setImage] = useState(null);
+  const navigation = useNavigate()
+
+  const chechAuthenticate = () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        console.log(uid)
+      } else {
+        navigation('/panellogin')
+      }
+    });
+  }
+
+
+  useEffect(() => {
+    chechAuthenticate()
+  }, [])
 
   const [formData, setFormData] = useState({
     blogPostImageURL: "",
