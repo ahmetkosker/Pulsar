@@ -29,7 +29,7 @@ export default function PanelLogin() {
 
     return (
         <div className='flex justify-center items-center flex-row w-full h-screen'>
-            <img src='/pulsarMainLogo.png' className='w-1/2 h-1/2 object-contain relative right-36' />
+            <img onClick={() => navigation('/')} src='/pulsarMainLogo.png' className='w-1/2 h-1/2 object-contain relative right-36 cursor-pointer' />
             <div className='flex flex-col justify-center items-center w-1/3 h-4/5 bg-[#A59719] rounded-3xl'>
                 <p className='font-medium text-2xl'>Pulsar Records Admin Panel</p>
                 <div className='w-5/6 mx-4 my-8'>
