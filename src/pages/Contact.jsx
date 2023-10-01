@@ -24,7 +24,7 @@ const Artist = () => {
     }
   }
 
-  const [artists, setArtists] = useState([])
+  const [artists, setArtists] = useState(null)
 
   const sendMail = () => {
     axios
@@ -44,6 +44,13 @@ const Artist = () => {
       .then(res => setArtists(res.data))
       .catch(err => console.log(err))
   }, [])
+
+
+  if (artists === null) return (
+    <main className="w-full h-screen flex justify-center items-center font-semibold text-2xl text-[#A59719]">
+      Loading...
+    </main>
+  )
 
   return (
     <main className='w-full h-auto px-5 mb-24'>
@@ -100,7 +107,7 @@ const Artist = () => {
         <div className='flex flex-col gap-y-5 mt-20 '>
           <img
             onClick={() => navigate('/')}
-            src='/PULSAR.png'
+            src='/pulsarMainLogo.png'
             alt='banner'
             className='3xl:w-96 cursor-pointer w-60'
           />

@@ -9,14 +9,14 @@ const Artist = () => {
   const [canScroll, setCanScroll] = useState(true);
 
   const size = {
-    width: "100%",
+    width: "90%",
     height: 200,
   };
 
   const view = "list"; // or 'coverart'
   const theme = "black"; // or 'white'
 
-  const [artists, setArtists] = useState([]);
+  const [artists, setArtists] = useState(null);
 
   useEffect(() => {
     axios
@@ -46,6 +46,12 @@ const Artist = () => {
     }
   };
 
+  if (artists === null) return (
+    <main className="w-full h-screen flex justify-center items-center font-semibold text-2xl text-[#A59719]">
+      Loading...
+    </main>
+  )
+
   return (
     <main className="w-full h-auto px-5 mb-24">
       <section className="max-w-full sm:mt-20 mt-12 flex justify-between">
@@ -55,9 +61,8 @@ const Artist = () => {
             page === 1 ? (
               <section>
                 <div
-                  className={`${
-                    trans && "scale-[1.8]"
-                  } flex gap-x-12 items-center transition-all origin-top-left relative -top-32 right-24`}
+                  className={`${trans && "scale-[1.8]"
+                    } flex gap-x-12 items-center transition-all origin-top-left relative -top-32 right-24`}
                 >
                   <div className="mb-6">
                     <img
@@ -90,28 +95,28 @@ const Artist = () => {
               >
                 {user.docData.role === "Sound Engineer"
                   ? user.docData.projects.map((project, index) => {
-                      return (
-                        <div key={index}>
-                          <SpotifyPlayer
-                            uri={project}
-                            size={size}
-                            view={view}
-                            theme={theme}
-                          />
-                        </div>
-                      );
-                    })
+                    return (
+                      <div key={index}>
+                        <SpotifyPlayer
+                          uri={project}
+                          size={size}
+                          view={view}
+                          theme={theme}
+                        />
+                      </div>
+                    );
+                  })
                   : user.docData.projects.map((project, index) => {
-                      return (
-                        <div key={index}>
-                          <img
-                            className="w-52 h-52 object-cover"
-                            src={project}
-                            alt="IMAGE"
-                          />
-                        </div>
-                      );
-                    })}
+                    return (
+                      <div key={index}>
+                        <img
+                          className="w-52 h-52 object-cover"
+                          src={project}
+                          alt="IMAGE"
+                        />
+                      </div>
+                    );
+                  })}
               </section>
             ) : (
               ""
@@ -121,24 +126,24 @@ const Artist = () => {
               return (
                 <div
                   key={artist.docData.id}
-                  className="flex flex-col items-center relative -top-32 right-24 h-auto"
+                  onClick={() => {
+                    setUser(artist);
+                    setTimeout(() => {
+                      setTrans(true);
+                    }, 1);
+                  }}
+                  className="flex flex-col items-center relative mx-2 -top-32 right-24 h-auto cursor-pointer"
                 >
                   <div className="mb-6">
                     <img
                       src={artist.docData.image}
                       alt="artist"
-                      className="w-[267px] h-[267px] object-cover"
+                      className="w-[250px] h-[267px] rounded-2xl object-cover"
                     />
                   </div>
 
                   <div
-                    onClick={() => {
-                      setUser(artist);
-                      setTimeout(() => {
-                        setTrans(true);
-                      }, 1);
-                    }}
-                    className="hover:opacity-25 duration-200 easy-out transition-opacity cursor-pointer"
+                    className="hover:opacity-25 duration-200 easy-out transition-opacity"
                   >
                     <div>{artist.docData.role}</div>
                     <div>{artist.docData.nameAndSurname}</div>
@@ -151,7 +156,7 @@ const Artist = () => {
         <div>
           <img
             onClick={() => navigate("/")}
-            src="/PULSAR.png"
+            src="/pulsarMainLogo.png"
             alt="banner"
             className="w-44 cursor-pointer"
           />
