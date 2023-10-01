@@ -11,10 +11,13 @@ const Artist = () => {
   const [customerRequestedArtists, setCustomerRequestedArtists] = useState([]);
   const [customerEmail, setCustomerEmail] = useState("");
   const [customerContent, setCustomerContent] = useState("");
-
-  const handleImageToggle = (imageUrl, isChecked, id) => {
+  console.log(customerRequestedArtists);
+  const handleImageToggle = (imageUrl, isChecked, id, artist) => {
     if (isChecked) {
-      setCustomerRequestedArtists([...customerRequestedArtists, id]);
+      setCustomerRequestedArtists([
+        ...customerRequestedArtists,
+        { id, artist },
+      ]);
       setSelectedImages([...selectedImages, imageUrl]);
     } else {
       setCustomerRequestedArtists(
@@ -108,6 +111,7 @@ const Artist = () => {
                       imageUrl={artist.docData.image}
                       onToggle={handleImageToggle}
                       id={artist.docID}
+                      artist={artist.docData}
                     />
                   </div>
                 ))}

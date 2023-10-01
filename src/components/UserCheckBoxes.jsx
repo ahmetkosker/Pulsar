@@ -13,12 +13,12 @@ const RoundCheckbox = ({ isChecked, onToggle }) => {
   );
 };
 
-export const CheckboxImage = ({ imageUrl, onToggle, id }) => {
+export const CheckboxImage = ({ imageUrl, onToggle, id, artist }) => {
   const [isChecked, setIsChecked] = useState(false);
 
   const toggleCheckbox = () => {
     setIsChecked(!isChecked);
-    onToggle(imageUrl, !isChecked, id);
+    onToggle(imageUrl, !isChecked, id, artist);
   };
 
   return (
