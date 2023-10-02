@@ -160,7 +160,7 @@ const Artist = () => {
                       setTrans(true);
                     }, 1);
                   }}
-                  className="flex flex-col items-center relative mx-2 -top-32 right-24 h-auto cursor-pointer"
+                  className="flex flex-col items-center relative mx-2 -top-32 h-auto cursor-pointer"
                 >
                   <div className="mb-6">
                     <img
