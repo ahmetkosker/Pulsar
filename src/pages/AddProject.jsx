@@ -33,15 +33,6 @@ function AddProject() {
   const [formData, setFormData] = useState({
     artistName: "",
     artistJobTitle: "",
-    jobType: "",
-    producerName: "",
-    lyrics: "",
-    guitaristName: "",
-    bassistName: "",
-    drummerName: "",
-    keyboardistName: "",
-    mixerName: "",
-    masteringName: "",
   });
 
   const getImage = async (path) => {
@@ -60,6 +51,26 @@ function AddProject() {
     });
   };
 
+  const [features, setFeatures] = useState([""]);
+
+  const handleAddSpotifyLink = () => {
+    setFeatures([...features, ""]);
+  };
+
+  const handleSpotifyLinkChange = (index, value) => {
+    const updatedLinks = [...features];
+    updatedLinks[index] = value;
+    setFeatures(updatedLinks);
+  };
+
+  const handleRemoveSpotifyLink = (index) => {
+    const updatedLinks = [...features];
+    updatedLinks.splice(index, 1);
+    setFeatures(updatedLinks);
+  };
+
+  console.log(features);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let imageToDB = "";
@@ -70,21 +81,11 @@ function AddProject() {
       imageToDB = await getImage(snapshot.metadata.fullPath);
     });
 
-    console.log(formData.guitaristName);
-
     axios
       .post("https://addproject-zkwsxnxtga-ew.a.run.app", {
         artistName: formData.artistName,
         artistJobTitle: formData.artistJobTitle,
-        jobType: formData.jobType,
-        producerName: formData.producerName,
-        lyrics: formData.lyrics,
-        guitaristName: formData.guitaristName,
-        bassistName: formData.bassistName,
-        drummerName: formData.drummerName,
-        keyboardistName: formData.keyboardistName,
-        mixerName: formData.mixerName,
-        masteringName: formData.masteringName,
+        features,
         projectImage: imageToDB,
       })
       .then((res) => {
@@ -138,122 +139,37 @@ function AddProject() {
             className="border p-2 w-full rounded-md"
           />
         </div>
-        <div>
-          <label htmlFor="jobType" className="block font-medium">
-            İş Türü:
-          </label>
-          <input
-            type="text"
-            id="jobType"
-            name="jobType"
-            value={formData.jobType}
-            onChange={handleChange}
-            className="border p-2 w-full rounded-md"
-          />
-        </div>
-        <div>
-          <label htmlFor="producerName" className="block font-medium">
-            Prodüktör Adı:
-          </label>
-          <input
-            type="text"
-            id="producerName"
-            name="producerName"
-            value={formData.producerName}
-            onChange={handleChange}
-            className="border p-2 w-full rounded-md"
-          />
-        </div>
-        <div>
-          <label htmlFor="lyricsName" className="block font-medium">
-            Söz Yazarı Adı:
-          </label>
-          <input
-            type="text"
-            id="lyrics"
-            name="lyrics"
-            value={formData.lyrics}
-            onChange={handleChange}
-            className="border p-2 w-full rounded-md"
-          />
-        </div>
-        <div>
-          <label htmlFor="guitaristName" className="block font-medium">
-            Gitarist Adı:
-          </label>
-          <input
-            type="text"
-            id="guitaristName"
-            name="guitaristName"
-            value={formData.guitaristName}
-            onChange={handleChange}
-            className="border p-2 w-full rounded-md"
-          />
-        </div>
-        <div>
-          <label htmlFor="bassistName" className="block font-medium">
-            Basçı Adı:
-          </label>
-          <input
-            type="text"
-            id="bassistName"
-            name="bassistName"
-            value={formData.bassistName}
-            onChange={handleChange}
-            className="border p-2 w-full rounded-md"
-          />
-        </div>
-        <div>
-          <label htmlFor="drummerName" className="block font-medium">
-            Davulcu Adı:
-          </label>
-          <input
-            type="text"
-            id="drummerName"
-            name="drummerName"
-            value={formData.drummerName}
-            onChange={handleChange}
-            className="border p-2 w-full rounded-md"
-          />
-        </div>
-        <div>
-          <label htmlFor="keyboardistName" className="block font-medium">
-            Klavyeci Adı:
-          </label>
-          <input
-            type="text"
-            id="keyboardistName"
-            name="keyboardistName"
-            value={formData.keyboardistName}
-            onChange={handleChange}
-            className="border p-2 w-full rounded-md"
-          />
-        </div>
-        <div>
-          <label htmlFor="mixerName" className="block font-medium">
-            Mikser Adı:
-          </label>
-          <input
-            type="text"
-            id="mixerName"
-            name="mixerName"
-            value={formData.mixerName}
-            onChange={handleChange}
-            className="border p-2 w-full rounded-md"
-          />
-        </div>
-        <div>
-          <label htmlFor="masteringName" className="block font-medium">
-            Mastering Adı:
-          </label>
-          <input
-            type="text"
-            id="masteringName"
-            name="masteringName"
-            value={formData.masteringName}
-            onChange={handleChange}
-            className="border p-2 w-full rounded-md"
-          />
+        <div className="relative z-0 w-full mb-6 group mt-[38px]">
+          {features.map((link, index) => (
+            <div key={index} className="relative z-0 w-full mb-6 group">
+              <input
+                type="text"
+                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 peer"
+                placeholder=" "
+                required
+                value={link}
+                onChange={(e) => handleSpotifyLinkChange(index, e.target.value)}
+              />
+              <label className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                Örn = Gitarist: Ahmet Köşker
+              </label>
+              <button
+                type="button"
+                className="absolute top-4 right-4 text-red-500 cursor-pointer"
+                onClick={() => handleRemoveSpotifyLink(index)}
+              >
+                Kaldır
+              </button>
+            </div>
+          ))}
+
+          <button
+            type="button"
+            onClick={handleAddSpotifyLink}
+            className="text-blue-600 mt-2 mb-4 font-medium text-sm"
+          >
+            Yeni özellik ekle
+          </button>
         </div>
         <button
           type="submit"
