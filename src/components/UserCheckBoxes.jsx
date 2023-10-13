@@ -33,7 +33,7 @@ export const CheckboxImage = ({ imageUrl, onToggle, id, artist }) => {
         }
         onClick={toggleCheckbox}
       />
-      <label className="cursor-pointer absolute bottom-1 left-8">
+      <label className="cursor-pointer absolute bottom-1 left-2">
         <RoundCheckbox isChecked={isChecked} onToggle={toggleCheckbox} />
       </label>
     </div>

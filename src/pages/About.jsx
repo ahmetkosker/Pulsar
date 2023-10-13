@@ -1,8 +1,11 @@
-import React from "react";
-import Aside from "../components/Home/Aside";
-import { useNavigate } from "react-router-dom";
-import { aboutTitle } from "../configs/simpleFunctions";
-import Footer from "../components/Footer/Footer";
+
+import React from 'react'
+import Aside from '../components/Home/Aside'
+import { useNavigate } from 'react-router-dom'
+import { aboutTitle } from '../configs/simpleFunctions'
+import Lottie from "lottie-react";
+import wave from "../components/pulsaranimation.json";
+
 
 const About = () => {
   const navigate = useNavigate();
@@ -23,7 +26,7 @@ const About = () => {
           />
         </div>
       </section>
-      <Footer />
+      <Lottie animationData={wave} autoPlay className='w-screen absolute -z-50 mx-auto left-0 right-0 bottom-0' />
     </main>
   );
 };
