@@ -50,7 +50,7 @@ const Blogs = () => {
           src="/images/BG.png"
           alt="BG"
         />
-        <div className="flex flex-col items-center relative right-10 gap-y-12 ml-3">
+        <div className="flex flex-col items-center relative right-10 gap-y-5 xl:gap-y-7 2xl:gap-y-12  ml-3">
           {blogs.map((blog, index) => {
             return (
               <div
