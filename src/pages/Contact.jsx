@@ -84,7 +84,7 @@ const Artist = () => {
               <label>MAIL:</label>
               <input
                 type="text"
-                className="w-[684px] bg-[#D9D9D9] h-[57.966px] outline-none rounded-xl"
+                className="w-[684px] bg-[#D9D9D9] h-[57.966px] outline-none rounded-xl py-2 px-2"
                 value={customerEmail}
                 onChange={(e) => setCustomerEmail(e.target.value)}
               />
@@ -95,7 +95,7 @@ const Artist = () => {
                 value={customerContent}
                 onChange={(e) => setCustomerContent(e.target.value)}
                 type="text"
-                className="w-[684px] bg-[#D9D9D9] h-[100px] outline-none rounded-xl"
+                className="w-[684px] bg-[#D9D9D9] h-[100px] outline-none rounded-xl py-2 px-2"
               />
             </div>
             <div className="mt-3 flex flex-col text-[20px] text-black font-normal gap-y-3 ">
@@ -123,6 +123,7 @@ const Artist = () => {
                   }}
                   src="/images/leftArrow.png"
                   alt="Left"
+                  className="w-16 h-16 object-contain cursor-pointer relative right-6"
                 />
                 <img
                   onClick={(e) => {
@@ -130,10 +131,11 @@ const Artist = () => {
                   }}
                   src="/images/rightArrow.png"
                   alt="right"
+                  className="w-16 h-16 object-contain cursor-pointer relative left-6"
                 />
               </div>
               <div
-                className="flex justify-end items-center mt-1 float-right cursor-pointer"
+                className="flex justify-end items-center mt-4 float-right cursor-pointer"
                 onClick={sendMail}
               >
                 <div className="font-semibold cursor-pointer hover:opacity-50 transition-all">

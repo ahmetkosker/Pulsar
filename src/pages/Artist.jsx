@@ -19,8 +19,8 @@ const Artist = () => {
 
   const [artists, setArtists] = useState(null);
 
-  const artistText = "< Back To Artists";
-  const goBack = "< Back";
+  const artistText = "< Back To Artists"
+  const goBack = "< Back"
 
   useEffect(() => {
     axios
@@ -92,6 +92,7 @@ const Artist = () => {
 
                     {trans && (
                       <div className="flex flex-col text-[10px] gap-y-10 text-[#A59719]">
+
                         <div className="text-left">
                           {user.role.toUpperCase()}:{" "}
                           {user.nameAndSurname.toUpperCase()}
@@ -111,6 +112,7 @@ const Artist = () => {
                 unmountOnExit
               >
                 <section className="flex justify-between flex-wrap gap-x-6 relative">
+
                   <button
                     className="absolute right-6 -top-24 text-white bg-[#A59719] font-medium rounded-lg text-sm px-3 py-2 text-center mr-2 mb-2"
                     onClick={() => setPage(1)}
@@ -165,7 +167,6 @@ const Artist = () => {
                         className="w-32 xl:w-[250px] h-32 xl:h-[267px] rounded-2xl object-cover"
                       />
                     </div>
-
                     <div className="hover:opacity-25 duration-200 easy-out transition-opacity">
                       <div>{artist.role}</div>
                       <div>{artist.nameAndSurname}</div>
