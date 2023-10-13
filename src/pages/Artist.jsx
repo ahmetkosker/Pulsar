@@ -145,7 +145,7 @@ const Artist = () => {
               </CSSTransition>
             </div>
           ) : (
-            <div className="max-sm:grid max-sm:grid-cols-2 max-sm:w-72 max-sm:absolute max-sm:right-10 lg:flex">
+            <div className="max-sm:grid max-sm:grid-cols-2 max-sm:w-72 max-sm:absolute max-sm:right-10 lg:flex flex-wrap lg:gap-5">
               {artists.map((artist) => {
                 return (
                   <div
