@@ -19,7 +19,7 @@ export default function PanelNavbar({
         <div className='w-screen h-32 flex justify-between items-center bg-[#d4d3c6]'>
             <div className='flex justify-between items-center'>
                 <img
-                    onClick={() => navigation('/panelHomepage')}
+                    onClick={() => navigation('/')}
                     className='w-32 h-24 object-contain cursor-pointer'
                     src='/pulsarMainLogo.png' />
                 <p className='text-2xl font-light'>{pageTitle}</p>

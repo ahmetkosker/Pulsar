@@ -46,7 +46,7 @@ export default function PanelHomepage() {
                 deleteTitle={'Blog Management'}
                 addTitleFunction={'/manage-artists'}
                 updateTitleFunction={'/manage-projects'}
-                deleteTitleFunction={'/addBlog'}
+                deleteTitleFunction={'/manage-blogs'}
                 logOutTitle={'Logout'}
                 logOutFunction={logoutFunction}
             />

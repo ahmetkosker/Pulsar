@@ -8,6 +8,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PanelNavbar from "../../../components/PanelNavigation/PanelNavbar";
 
 function AddProject() {
   const [image, setImage] = useState(null);
@@ -98,87 +99,94 @@ function AddProject() {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <ToastContainer />
-      <h2 className="text-2xl font-bold mb-4">Sanatçı Bilgi Formu</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label htmlFor="artistName" className="block font-medium">
-            Proje resmi:
-          </label>
-          <input
-            onChange={(e) => setImage(e.target.files[0])}
-            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-            type="file"
-            accept="image/*"
-          />
-        </div>
-        <div>
-          <label htmlFor="artistName" className="block font-medium">
-            Sanatçı Adı:
-          </label>
-          <input
-            type="text"
-            id="artistName"
-            name="artistName"
-            value={formData.artistName}
-            onChange={handleChange}
-            className="border p-2 w-full rounded-md"
-          />
-        </div>
-        <div>
-          <label htmlFor="artistJobTitle" className="block font-medium">
-            Sanatçı İş Unvanı:
-          </label>
-          <input
-            type="text"
-            id="artistJobTitle"
-            name="artistJobTitle"
-            value={formData.artistJobTitle}
-            onChange={handleChange}
-            className="border p-2 w-full rounded-md"
-          />
-        </div>
-        <div className="relative z-0 w-full mb-6 group mt-[38px]">
-          {features.map((link, index) => (
-            <div key={index} className="relative z-0 w-full mb-6 group">
-              <input
-                type="text"
-                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 peer"
-                placeholder=" "
-                required
-                value={link}
-                onChange={(e) => handleSpotifyLinkChange(index, e.target.value)}
-              />
-              <label className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                Örn = Gitarist: Ahmet Köşker
-              </label>
-              <button
-                type="button"
-                className="absolute top-4 right-4 text-red-500 cursor-pointer"
-                onClick={() => handleRemoveSpotifyLink(index)}
-              >
-                Kaldır
-              </button>
-            </div>
-          ))}
+    <>
+      <PanelNavbar
+        pageTitle={"Add Project"}
+        goBackTitle={"Go Back"}
+        goBackFunction={"/manage-projects"}
+      />
+      <div className="container mx-auto p-4 mt-4">
+        <ToastContainer />
+        <h2 className="text-2xl font-bold mb-4">Sanatçı Bilgi Formu</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label htmlFor="artistName" className="block font-medium">
+              Proje resmi:
+            </label>
+            <input
+              onChange={(e) => setImage(e.target.files[0])}
+              className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+              type="file"
+              accept="image/*"
+            />
+          </div>
+          <div>
+            <label htmlFor="artistName" className="block font-medium">
+              Sanatçı Adı:
+            </label>
+            <input
+              type="text"
+              id="artistName"
+              name="artistName"
+              value={formData.artistName}
+              onChange={handleChange}
+              className="border p-2 w-full rounded-md"
+            />
+          </div>
+          <div>
+            <label htmlFor="artistJobTitle" className="block font-medium">
+              Sanatçı İş Unvanı:
+            </label>
+            <input
+              type="text"
+              id="artistJobTitle"
+              name="artistJobTitle"
+              value={formData.artistJobTitle}
+              onChange={handleChange}
+              className="border p-2 w-full rounded-md"
+            />
+          </div>
+          <div className="relative z-0 w-full mb-6 group mt-[38px]">
+            {features.map((link, index) => (
+              <div key={index} className="relative z-0 w-full mb-6 group">
+                <input
+                  type="text"
+                  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 peer"
+                  placeholder=" "
+                  required
+                  value={link}
+                  onChange={(e) => handleSpotifyLinkChange(index, e.target.value)}
+                />
+                <label className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                  Örn = Gitarist: Ahmet Köşker
+                </label>
+                <button
+                  type="button"
+                  className="absolute top-4 right-4 text-red-500 cursor-pointer"
+                  onClick={() => handleRemoveSpotifyLink(index)}
+                >
+                  Kaldır
+                </button>
+              </div>
+            ))}
 
+            <button
+              type="button"
+              onClick={handleAddSpotifyLink}
+              className="text-blue-600 mt-2 mb-4 font-medium text-sm"
+            >
+              Yeni özellik ekle
+            </button>
+          </div>
           <button
-            type="button"
-            onClick={handleAddSpotifyLink}
-            className="text-blue-600 mt-2 mb-4 font-medium text-sm"
+            type="submit"
+            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700"
           >
-            Yeni özellik ekle
+            Formu Gönder
           </button>
-        </div>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700"
-        >
-          Formu Gönder
-        </button>
-      </form>
-    </div>
+        </form>
+      </div>
+    </>
   );
 }
 
