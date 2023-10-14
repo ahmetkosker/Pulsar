@@ -13,7 +13,7 @@ const About = () => {
     <main className="w-full max-h-full px-5">
       <section className="max-w-full sm:mt-20 mt-12 flex justify-between">
         <Aside />
-        <div className="sm:w-7/12 w-1/2 sm:pt-36 text-center font-extrabold sm:text-3xl text-xs pt-20 relative lg:-top-32 2xl:top-0">
+        <div className="sm:w-7/12 w-1/2 sm:pt-12 text-center font-extrabold sm:text-3xl text-xs pt-4 relative lg:-top-32 2xl:-top-20">
           Pulsar Records olarak 2020 yılında Ulaş Çınar Çelik tarafından kurulmuş bir plak şirketiyiz. Müzisyeninden tasarımcısına ve hatta blog yazarına kadar eğlenceli, samimi ve profesyonel bir ekibiz. Kurulduğumuz günden itibaren yeni ya da eski, her türlü müzisyene destek veriyor ve iş yapıyoruz. Müziğe dair duygularını ya da fikirlerini bizimle paylaşmak istersen bir tık kadar uzağındayız!
         </div>
         <div>

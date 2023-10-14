@@ -10,7 +10,7 @@ const Home = () => {
       <section className="max-w-full sm:mt-20 mt-12 flex justify-between">
         <Aside />
         <div>
-          <img src="/pulsarMainLogo.png" alt="banner" className=" w-64" />
+          <img src="/pulsarMainLogo.png" alt="banner" className="w-32 sm:w-64" />
         </div>
       </section>
       <div className="flex justify-center items-start w-full h-fit self-center">
