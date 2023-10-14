@@ -18,7 +18,7 @@ function AddBlog() {
         const uid = user.uid;
         console.log(uid);
       } else {
-        navigation("/panellogin");
+        navigation("/adminpanel");
       }
     });
   };

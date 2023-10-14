@@ -1,8 +1,7 @@
 import React from "react";
-import { BsInstagram } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { instagramLink, shopifyLink } from "../../configs/simpleFunctions";
+import { shopifyLink } from "../../configs/simpleFunctions";
 
 const Aside = () => {
   const location = useLocation();
