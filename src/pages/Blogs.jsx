@@ -117,7 +117,7 @@ const Blogs = () => {
             onClick={() => navigate("/")}
             src="/pulsarMainLogo.png"
             alt="banner"
-            className="w-64 cursor-pointer object-contain"
+            className="w-full cursor-pointer object-contain"
           />
         </div>
       </section>
