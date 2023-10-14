@@ -1,21 +1,22 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import Footer from "./components/Footer/Footer";
 import About from "./pages/About";
 import Artist from "./pages/Artist";
 import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
 import Blogs from "./pages/Blogs";
-import Panel from "./pages/Panel";
-import AddProject from "./pages/AddProject";
 import AddBlog from "./pages/AddBlog";
-import { getAboutTitle } from "./configs/simpleFunctions";
-import PanelLogin from "./pages/PanelLogin";
-import PanelHomepage from "./pages/PanelHomepage";
+import PanelLogin from "./pages/AdminPanel/PanelMain/PanelLogin";
+import PanelHomepage from "./pages/AdminPanel/PanelMain/PanelHomepage";
+import ManageArtists from "./pages/AdminPanel/PanelArtists/ManageArtists";
+import AddArtist from "./pages/AdminPanel/PanelArtists/AddArtist";
+import DeleteArtists from "./pages/AdminPanel/PanelArtists/DeleteArtists";
+import PanelUpdate from "./pages/AdminPanel/PanelArtists/PanelUpdate";
+import ManageProjects from "./pages/AdminPanel/PanelProjects/ManageProjects";
+import AddProject from "./pages/AdminPanel/PanelProjects/AddProject";
 
 function App() {
-  getAboutTitle();
   return (
     <div className="min-h-screen">
       <BrowserRouter>
@@ -28,11 +29,15 @@ function App() {
               <Route path="/projects" element={<Projects />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/blogs" element={<Blogs />} />
-              <Route path="/panellogin" element={<PanelLogin />} />
+              <Route path="/adminpanel" element={<PanelLogin />} />
               <Route path="/panelHomepage" element={<PanelHomepage />} />
-              <Route path="/panel" element={<Panel />} />
-              <Route path="/addProject" element={<AddProject />} />
               <Route path="/addBlog" element={<AddBlog />} />
+              <Route path="/manage-artists" element={<ManageArtists />} />
+              <Route path="/manage-artists/addArtist" element={<AddArtist />} />
+              <Route path="/manage-artists/deleteArtist" element={<DeleteArtists />} />
+              <Route path="/manage-artists/panelUpdate" element={<PanelUpdate />} />
+              <Route path="/manage-projects" element={<ManageProjects />} />
+              <Route path="/manage-projects/addProject" element={<AddProject />} />
             </Routes>
           </div>
         </div>

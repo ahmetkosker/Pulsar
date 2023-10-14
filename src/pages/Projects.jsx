@@ -3,6 +3,7 @@ import Aside from "../components/Home/Aside";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
+import LoadingComponent from "../components/LoadingComponent";
 
 const Projects = () => {
   const navigate = useNavigate();
@@ -17,16 +18,14 @@ const Projects = () => {
 
   if (projects === null)
     return (
-      <main className="w-full h-screen flex justify-center items-center font-semibold text-2xl text-[#A59719]">
-        Loading...
-      </main>
+      <LoadingComponent />
     );
   console.log(projects);
   return (
     <main className="w-full h-auto px-5">
       <section className="max-w-full sm:mt-20 mt-12 flex justify-between">
         <Aside />
-        <div className="flex justify-start flex-wrap relative bottom-36 gap-y-12 w-full sm:ml-36 ml-12 gap-x-5 sm:pt-36 text-center font-extrabold sm:text-xl text-xs pt-36 xl:pt-20 pr-12 xl:pr-0">
+        <div className="flex justify-start flex-wrap relative bottom-12 gap-y-12 w-3/4 sm:ml-36 ml-12 gap-x-12 sm:pt-36 text-center font-extrabold sm:text-xl text-xs pt-36 xl:pt-20 pr-12 xl:pr-0">
           {projects?.map((project) => {
             return (
               <div
@@ -48,7 +47,7 @@ const Projects = () => {
                   </div>
                   <div className="group-hover:opacity-100 duration-500 opacity-0 -mt-2 ml-3 transition-all ease-in-out text-xs font-normal flex flex-col gap-y-1">
                     {project.docData?.features?.map((item) => {
-                      return <div className="text-[8px]">{item}</div>;
+                      return <div className="text-[10px]">{item}</div>;
                     })}
                   </div>
                 </div>

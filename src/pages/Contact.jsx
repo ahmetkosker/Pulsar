@@ -3,6 +3,7 @@ import Aside from "../components/Home/Aside";
 import { useNavigate } from "react-router-dom";
 import { CheckboxImage } from "../components/UserCheckBoxes";
 import axios from "axios";
+import LoadingComponent from "../components/LoadingComponent";
 
 const Artist = () => {
   const navigate = useNavigate();
@@ -62,17 +63,10 @@ const Artist = () => {
 
   if (artists === null)
     return (
-      <main className="w-full h-screen flex justify-center items-center font-semibold text-2xl text-[#A59719]">
-        Loading...
-      </main>
+      <LoadingComponent />
     );
 
-
-  if (artists === null) return (
-    <main className="w-full h-screen flex justify-center items-center font-semibold text-2xl text-[#A59719]">
-      Loading...
-    </main>
-  )
+  console.log(artists)
 
   return (
     <main className="w-full h-auto px-5">

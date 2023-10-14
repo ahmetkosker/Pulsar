@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 import { Pagination } from "@mui/material";
+import LoadingComponent from "../components/LoadingComponent";
 
 const Blogs = () => {
   const navigate = useNavigate();
@@ -36,9 +37,7 @@ const Blogs = () => {
 
   if (allBlogs === null)
     return (
-      <main className="w-full h-screen flex justify-center items-center font-semibold text-2xl text-[#A59719]">
-        Loading...
-      </main>
+      <LoadingComponent />
     );
 
   return (
@@ -54,11 +53,10 @@ const Blogs = () => {
           {blogs.map((blog, index) => {
             return (
               <div
-                className={`${
-                  test === index
+                className={`${test === index
                     ? "scale-110 sm:h-80 h-54 sm:w-3/5 w-4/5 lg:h-96"
                     : "sm:h-32 h-20 sm:w-3/5 w-4/5"
-                }  relative origin-bottom-right transition-all ease-in overflow-hidden bg-[#D9D9D9] opacity-80 py-2 px-2 sm:py-5 sm:px-7 rounded-2xl mt-2 flex flex-col ml-14 sm:ml-0`}
+                  }  relative origin-bottom-right transition-all ease-in overflow-hidden bg-[#D9D9D9] opacity-80 py-2 px-2 sm:py-5 sm:px-7 rounded-2xl mt-2 flex flex-col ml-14 sm:ml-0`}
               >
                 <div
                   className="flex items-center cursor-pointer"
@@ -67,29 +65,26 @@ const Blogs = () => {
                   <img
                     src={blog.docData.blogPostImageURL}
                     alt="banner"
-                    className={`rounded-2xl ${
-                      test === index
+                    className={`rounded-2xl ${test === index
                         ? "w-12 h-12 lg:w-16 lg:h-16 lg:mt-2 lg:ml-2 mt-3 ml-2 sm:w-24 sm:h-24 scale-125 sm:mt-6 sm:ml-5"
                         : "w-12 h-12 lg:w-16 lg:h-16 lg:mt-2 lg:ml-2 sm:w-24 sm:h-24"
-                    } transition-all origin-bottom-right object-cover`}
+                      } transition-all origin-bottom-right object-cover`}
                   />
                   <p
-                    className={`font-bold sm:text-lg sm:ml-5 transition-all text-xs ml-2 ${
-                      test === index
+                    className={`font-bold sm:text-lg sm:ml-5 transition-all text-xs ml-2 ${test === index
                         ? "opacity-100 sm:mt-1 lg:text-xs"
                         : "opacity-70 sm:mt-2 lg:text-xs"
-                    }`}
+                      }`}
                   >
                     {blog.docData.blogPostTitle}
                   </p>
                 </div>
                 <p
                   onClick={() => setTest(index)}
-                  className={`font-bold sm:text-sm w-full sm:mt-2 mt-3 ml-0 sm:ml-5 self-end absolute transition-all text-[7px] ${
-                    test === index
+                  className={`font-bold sm:text-sm w-full sm:mt-2 mt-3 ml-0 sm:ml-5 self-end absolute transition-all text-[7px] ${test === index
                       ? "sm:top-20 lg:text-xs sm:left-36 top-8 left-[72px] lg:left-[100px] lg:top-6"
                       : "sm:top-3/4 lg:text-xs sm:left-2/3 top-12 left-32"
-                  }`}
+                    }`}
                 >
                   {blog.docData.blogPostAuthor}
                 </p>

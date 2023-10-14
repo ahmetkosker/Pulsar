@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import SpotifyPlayer from "react-spotify-player";
 import { CSSTransition } from "react-transition-group";
+import Lottie from "lottie-react";
+import LoadingComponent from "../components/LoadingComponent";
 
 const Artist = () => {
   const navigate = useNavigate();
@@ -52,9 +54,7 @@ const Artist = () => {
 
   if (artists === null)
     return (
-      <main className="w-full h-screen flex justify-center items-center font-semibold text-2xl text-[#A59719]">
-        Loading...
-      </main>
+      <LoadingComponent />
     );
 
   return (
@@ -72,9 +72,8 @@ const Artist = () => {
               >
                 <section onWheel={handleWheel}>
                   <div
-                    className={`${
-                      trans && "scale-[1.8]"
-                    } flex gap-x-12 items-center transition-all origin-top-left relative -top-32 right-24`}
+                    className={`${trans && "scale-[1.8]"
+                      } flex gap-x-12 items-center transition-all origin-top-left relative -top-32 right-24`}
                   >
                     <div className="mb-6">
                       <img
@@ -122,28 +121,28 @@ const Artist = () => {
                   </button>
                   {user.role === "Sound Engineer"
                     ? user.projects.map((project, index) => {
-                        return (
-                          <div key={index}>
-                            <SpotifyPlayer
-                              uri={project}
-                              size={size}
-                              view={view}
-                              theme={theme}
-                            />
-                          </div>
-                        );
-                      })
+                      return (
+                        <div key={index}>
+                          <SpotifyPlayer
+                            uri={project}
+                            size={size}
+                            view={view}
+                            theme={theme}
+                          />
+                        </div>
+                      );
+                    })
                     : user.projects.map((project, index) => {
-                        return (
-                          <div key={index}>
-                            <img
-                              className="w-52 h-52 object-contain"
-                              src={project}
-                              alt="IMAGE"
-                            />
-                          </div>
-                        );
-                      })}
+                      return (
+                        <div key={index}>
+                          <img
+                            className="w-52 h-52 object-contain"
+                            src={project}
+                            alt="IMAGE"
+                          />
+                        </div>
+                      );
+                    })}
                 </section>
               </CSSTransition>
             </div>
@@ -152,7 +151,7 @@ const Artist = () => {
               {artists.map((artist) => {
                 return (
                   <div
-                    key={artist.id}
+                    key={artist.docData.id}
                     onClick={() => {
                       setUser(artist);
                       setTimeout(() => {
@@ -163,17 +162,17 @@ const Artist = () => {
                   >
                     <div className="mb-6">
                       <img
-                        src={artist.image}
+                        src={artist.docData.image}
                         alt="artist"
                         className="w-32 xl:w-[250px] h-32 xl:h-[267px] rounded-2xl object-cover"
                       />
                     </div>
                     <div className="hover:opacity-25 duration-200 easy-out transition-opacity">
                       <div className="text-xs lg:text-lg xl:text-xl">
-                        {artist.role}
+                        {artist.docData.role}
                       </div>
                       <div className="text-xs lg:text-lg xl:text-xl">
-                        {artist.nameAndSurname}
+                        {artist.docData.nameAndSurname}
                       </div>
                     </div>
                   </div>
