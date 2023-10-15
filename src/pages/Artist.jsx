@@ -77,7 +77,7 @@ const Artist = () => {
                   >
                     <div className="mb-6 max-sm:w-20">
                       <img
-                        src={user.docData.image}
+                        src={user.image}
                         alt="artist"
                         className="w-48 xl:w-[267px] h-48 xl:h-[267px] object-cover rounded-lg max-sm:w-20 max-sm:h-auto"
                       />
@@ -95,11 +95,11 @@ const Artist = () => {
                     {trans && (
                       <div className="flex flex-col text-[6px] lg:text-[9px] xl:text-[10px] gap-y-10 max-sm:gap-y-1 relative max-sm:-top-6 max-sm:-left-9 max-sm:text-[5px] text-[#A59719] max-sm:w-12">
                         <div className="text-left max-sm:leading-[5px] max-sm:w-20 ">
-                          {user.docData.role.toUpperCase()}:{" "}
-                          {user.docData.nameAndSurname.toUpperCase()}
+                          {user.role.toUpperCase()}:{" "}
+                          {user.nameAndSurname.toUpperCase()}
                         </div>
                         <div className="text-black font-bold w-24 lg:w-40 xl:w-60 text-[6px] lg:text-[9px] xl:text-[10px] leading-[11px] max-sm:leading-[5px] text-justify max-sm:text-[5px] max-sm:w-20">
-                          {user.docData.detail.toUpperCase()}
+                          {user.detail.toUpperCase()}
                         </div>
                       </div>
                     )}
@@ -120,8 +120,8 @@ const Artist = () => {
 
                     {goBack}
                   </button>
-                  {user.docData.role === "Sound Engineer"
-                    ? user.docData.projects.map((project, index) => {
+                  {user.role === "Sound Engineer"
+                    ? user.projects.map((project, index) => {
                       return (
                         <div className="max-sm:relative max-sm:-left-32 max-sm:w-52" key={index}>
                           <SpotifyPlayer
@@ -133,7 +133,7 @@ const Artist = () => {
                         </div>
                       );
                     })
-                    : user.docData.projects.map((project, index) => {
+                    : user.projects.map((project, index) => {
                       return (
                         <div key={index}>
                           <img
