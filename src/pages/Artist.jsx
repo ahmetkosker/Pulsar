@@ -154,7 +154,7 @@ const Artist = () => {
                   <div
                     key={artist.docData.id}
                     onClick={() => {
-                      setUser(artist);
+                      setUser(artist.docData);
                       setTimeout(() => {
                         setTrans(true);
                       }, 10);

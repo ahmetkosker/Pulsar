@@ -34,6 +34,7 @@ function AddProject() {
   const [formData, setFormData] = useState({
     artistName: "",
     artistJobTitle: "",
+    projectLink: ""
   });
 
   const getImage = async (path) => {
@@ -75,12 +76,18 @@ function AddProject() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let imageToDB = "";
+    let controllerValue = "";
+
 
     const imagePath = ref(storage, `/projects/${uuidv4()}`);
 
     await uploadBytes(imagePath, image).then(async (snapshot) => {
       imageToDB = await getImage(snapshot.metadata.fullPath);
-    });
+    }).then(() => {
+      if (formData.projectLink === "") {
+        controllerValue = imageToDB
+      }
+    })
 
     axios
       .post("https://addproject-zkwsxnxtga-ew.a.run.app", {
@@ -88,6 +95,7 @@ function AddProject() {
         artistJobTitle: formData.artistJobTitle,
         features,
         projectImage: imageToDB,
+        projectLink: controllerValue
       })
       .then((res) => {
         toast.success("Proje başarıyla eklendi.");
@@ -122,7 +130,7 @@ function AddProject() {
           </div>
           <div>
             <label htmlFor="artistName" className="block font-medium">
-              Sanatçı Adı:
+              Proje Adı:
             </label>
             <input
               type="text"
@@ -135,13 +143,26 @@ function AddProject() {
           </div>
           <div>
             <label htmlFor="artistJobTitle" className="block font-medium">
-              Sanatçı İş Unvanı:
+              Proje Türü:
             </label>
             <input
               type="text"
               id="artistJobTitle"
               name="artistJobTitle"
               value={formData.artistJobTitle}
+              onChange={handleChange}
+              className="border p-2 w-full rounded-md"
+            />
+          </div>
+          <div>
+            <label htmlFor="artistJobTitle" className="block font-medium">
+              Proje Linki (Spotify):
+            </label>
+            <input
+              type="text"
+              id="artistJobTitle"
+              name="projectLink"
+              value={formData.projectLink}
               onChange={handleChange}
               className="border p-2 w-full rounded-md"
             />

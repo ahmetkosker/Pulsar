@@ -39,7 +39,7 @@ export default function PanelNavbar({
                     className='lg:text-2xl font-light text-red-600 relative cursor-pointer hover:border-b-4 border-red-500'>{logOutTitle}</p>
                 <p
                     onClick={() => navigation(goBackFunction)}
-                    className='lg:text-2xl font-light text-red-600 relative cursor-pointer hover:border-b-4 border-red-500'>{goBackTitle}</p>
+                    className='lg:text-2xl font-light text-red-600 right-2 relative cursor-pointer hover:border-b-4 border-red-500'>{goBackTitle}</p>
             </div>
         </div >
     )

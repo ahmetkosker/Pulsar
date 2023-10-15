@@ -4,11 +4,17 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 import LoadingComponent from "../components/LoadingComponent";
+import { Link } from "react-router-dom";
 
 const Projects = () => {
   const navigate = useNavigate();
 
   const [projects, setProjects] = useState(null);
+
+  const handleLinkClick = (tabURL) => {
+    const newTabURL = tabURL;
+    window.open(newTabURL, '_blank');
+  };
 
   useEffect(() => {
     axios
@@ -29,8 +35,9 @@ const Projects = () => {
           {projects?.map((project) => {
             return (
               <div
+                onClick={() => handleLinkClick(project.docData.projectLink)}
                 key={project.docID}
-                className="flex flex-col items-center group"
+                className="flex flex-col items-center group cursor-pointer"
               >
                 <div className="group-hover:mb-0 transition-all ">
                   <img
