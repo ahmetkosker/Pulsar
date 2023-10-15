@@ -1,5 +1,6 @@
 import React from 'react'
 import PanelNavbar from '../../../components/PanelNavigation/PanelNavbar'
+import ShowBlogs from './ShowBlogs'
 
 export default function ManageBlogs() {
     return (
@@ -15,7 +16,7 @@ export default function ManageBlogs() {
                 deleteTitle={"Delete Blog"}
                 deleteTitleFunction={"/manage-blogs/deleteBlog"}
             />
-            <div>ManageBlogs</div>
+            <ShowBlogs />
         </>
     )
 }
