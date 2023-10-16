@@ -6,6 +6,8 @@ import SpotifyPlayer from "react-spotify-player";
 import { CSSTransition } from "react-transition-group";
 import Lottie from "lottie-react";
 import LoadingComponent from "../components/LoadingComponent";
+import downArrow from '../components/downArrow.png'
+import upArrow from '../components/upArrow.png'
 
 const Artist = () => {
   const navigate = useNavigate();
@@ -101,6 +103,11 @@ const Artist = () => {
                         <div className="text-black font-bold w-24 lg:w-40 xl:w-60 text-[6px] lg:text-[9px] xl:text-[10px] leading-[11px] max-sm:leading-[5px] text-justify max-sm:text-[5px] max-sm:w-20">
                           {user.detail.toUpperCase()}
                         </div>
+                        <img
+                          onClick={() => setPage(2)}
+                          src={downArrow}
+                          alt="downArrow"
+                          className="sm:w-8 h-8 max-sm:w-4 max-sm:h-4 max-sm:top-2 max-sm:left-2 object-contain cursor-pointer" />
                       </div>
                     )}
                   </div>
@@ -117,7 +124,6 @@ const Artist = () => {
                     className="absolute right-6 -top-24 max-sm:top-24 max-sm:right-12 text-white bg-[#A59719] font-medium rounded-lg text-sm px-3 py-2 text-center mr-2 mb-2"
                     onClick={() => setPage(1)}
                   >
-
                     {goBack}
                   </button>
                   {user.role === "Sound Engineer"
@@ -144,8 +150,14 @@ const Artist = () => {
                         </div>
                       );
                     })}
+                  <img
+                    onClick={() => setPage(1)}
+                    src={upArrow}
+                    alt="upArrow"
+                    className="sm:w-16 h-16 max-sm:w-4 max-sm:h-4 max-sm:top-2 max-sm:left-2 object-contain cursor-pointer" />
                 </section>
               </CSSTransition>
+
             </div>
           ) : (
             <div className="max-sm:grid max-sm:grid-cols-2 max-sm:w-72 max-sm:absolute max-sm:right-10 lg:flex flex-wrap lg:gap-5 max-sm:gap-4">
