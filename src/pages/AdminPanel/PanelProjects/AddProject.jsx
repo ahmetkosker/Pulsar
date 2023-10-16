@@ -86,6 +86,8 @@ function AddProject() {
     }).then(() => {
       if (formData.projectLink === "") {
         controllerValue = imageToDB
+      } else {
+        controllerValue = formData.projectLink
       }
     })
 

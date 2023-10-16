@@ -182,7 +182,7 @@ const Artist = () => {
                     </div>
                     <div className="hover:opacity-25 duration-200 easy-out transition-opacity">
                       <div className="text-xs lg:text-lg xl:text-xl">
-                        {artist.docData.role}
+                        {artist.docData.artistTitle}
                       </div>
                       <div className="text-xs lg:text-lg xl:text-xl">
                         {artist.docData.nameAndSurname}

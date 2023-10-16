@@ -19,6 +19,7 @@ const AddArtist = () => {
   const [image, setImage] = useState("");
   const [role, setRole] = useState("");
   const [detail, setDetail] = useState("");
+  const [artistTitle, setArtistTitle] = useState("");
 
   const chechAuthenticate = () => {
     onAuthStateChanged(auth, (user) => {
@@ -79,6 +80,7 @@ const AddArtist = () => {
           image: imageToDB,
           role: "Visual Artist",
           detail,
+          artistTitle: artistTitle,
         })
         .then((res) => {
           toast.success("Artist başarıyla eklendi.");
@@ -97,6 +99,7 @@ const AddArtist = () => {
           image: imageToDB,
           role: "Sound Engineer",
           detail,
+          artistTitle: artistTitle,
         })
         .then((res) => {
           toast.success("Artist başarıyla eklendi.");
@@ -206,6 +209,18 @@ const AddArtist = () => {
               <MenuItem value={"VA"}>Visual Artist</MenuItem>
             </Select>
           </FormControl>
+        </div>
+        <div className="mt-6">
+          <p className="block font-medium">
+            Artist Ünvanı:
+          </p>
+          <input
+            type="text"
+            placeholder="Artist Ünvanı"
+            value={artistTitle}
+            onChange={(e) => setArtistTitle(e.target.value)}
+            className="border p-2 w-full rounded-md"
+          />
         </div>
         {role === "SE" ? (
           <div className="relative z-0 w-full mb-6 group mt-[38px]">
