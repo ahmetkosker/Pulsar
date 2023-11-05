@@ -13,12 +13,12 @@ const Aside = () => {
           to="/about"
           className={`font-extrabold sm:text-2xl text-xs cursor-pointer flex items-center relative ${
             location.pathname === "/about"
-              ? "text-[#a59719]"
+              ? "text-pulsar"
               : "hover:opacity-25 duration-100 easy-out transition-opacity"
           }`}
         >
           {location.pathname === "/about" && (
-            <div className="w-4 bg-[#a59719] h-1 absolute -left-5"></div>
+            <div className="w-4 bg-pulsar h-1 absolute -left-5"></div>
           )}
           ABOUT
         </Link>
@@ -29,12 +29,12 @@ const Aside = () => {
             to="/artist"
             className={`font-extrabold sm:text-2xl text-xs cursor-pointer flex items-center relative ${
               location.pathname === "/artist"
-                ? "text-[#a59719]"
+                ? "text-pulsar"
                 : "hover:opacity-25 duration-100 easy-out transition-opacity"
             }`}
           >
             {location.pathname === "/artist" && (
-              <div className="w-4 bg-[#a59719] h-1 absolute -left-5"></div>
+              <div className="w-4 bg-pulsar h-1 absolute -left-5"></div>
             )}
             ARTIST
           </Link>
@@ -46,12 +46,12 @@ const Aside = () => {
             to="/projects"
             className={`font-extrabold sm:text-2xl text-xs cursor-pointer flex items-center relative ${
               location.pathname === "/projects"
-                ? "text-[#a59719]"
+                ? "text-pulsar"
                 : "hover:opacity-25 duration-100 easy-out transition-opacity"
             }`}
           >
             {location.pathname === "/projects" && (
-              <div className="w-4 bg-[#a59719] h-1 absolute -left-5"></div>
+              <div className="w-4 bg-pulsar h-1 absolute -left-5"></div>
             )}
             PROJECTS
           </Link>
@@ -63,12 +63,12 @@ const Aside = () => {
             to="/contact"
             className={`font-extrabold sm:text-2xl text-xs cursor-pointer flex items-center relative ${
               location.pathname === "/contact"
-                ? "text-[#a59719]"
+                ? "text-pulsar"
                 : "hover:opacity-25 duration-100 easy-out transition-opacity"
             }`}
           >
             {location.pathname === "/contact" && (
-              <div className="w-4 bg-[#a59719] h-1 absolute -left-5"></div>
+              <div className="w-4 bg-pulsar h-1 absolute -left-5"></div>
             )}
             CONTACT
           </Link>
@@ -80,12 +80,12 @@ const Aside = () => {
             to="/blogs"
             className={`font-extrabold sm:text-2xl text-xs cursor-pointer flex items-center relative ${
               location.pathname === "/blogs"
-                ? "text-[#a59719]"
+                ? "text-pulsar"
                 : "hover:opacity-25 duration-100 easy-out transition-opacity"
             }`}
           >
             {location.pathname === "/blogs" && (
-              <div className="w-4 bg-[#a59719] h-1 absolute -left-5"></div>
+              <div className="w-4 bg-pulsar h-1 absolute -left-5"></div>
             )}
             BLOG
           </Link>

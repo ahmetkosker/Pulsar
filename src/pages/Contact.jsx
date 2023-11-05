@@ -62,10 +62,7 @@ const Artist = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  if (artists === null)
-    return (
-      <LoadingComponent />
-    );
+  if (artists === null) return <LoadingComponent />;
 
   return (
     <main className="w-full h-auto px-5">
@@ -145,11 +142,10 @@ const Artist = () => {
             src="/pulsarMainLogo.png"
             alt="banner"
             className="3xl:w-96 cursor-pointer w-60 max-sm:w-24"
-
           />
 
           <div className="3xl:w-96 3xl:text-3xl w-60 text-xl font-bold max-sm:text-sm max-sm:w-32">
-            +90 <span className="text-[#A59719]">545</span> 312 60 30
+            +90 <span className="text-pulsar">545</span> 312 60 30
           </div>
         </div>
       </section>

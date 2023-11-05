@@ -6,8 +6,8 @@ import SpotifyPlayer from "react-spotify-player";
 import { CSSTransition } from "react-transition-group";
 import Lottie from "lottie-react";
 import LoadingComponent from "../components/LoadingComponent";
-import downArrow from '../components/downArrow.png'
-import upArrow from '../components/upArrow.png'
+import downArrow from "../components/downArrow.png";
+import upArrow from "../components/upArrow.png";
 
 const Artist = () => {
   const navigate = useNavigate();
@@ -54,11 +54,8 @@ const Artist = () => {
     }
   };
 
-  if (artists === null)
-    return (
-      <LoadingComponent />
-    );
-  console.log(user)
+  if (artists === null) return <LoadingComponent />;
+  console.log(user);
   return (
     <main onWheel={handleWheel} className="w-full h-auto px-5 mb-24">
       <section className="max-w-full sm:mt-20 mt-12 flex justify-between">
@@ -74,8 +71,9 @@ const Artist = () => {
               >
                 <section onWheel={handleWheel}>
                   <div
-                    className={`${trans && "scale-[1.8]"
-                      } flex gap-x-12 items-center transition-all origin-top-left relative -top-32 right-24 max-sm:top-60`}
+                    className={`${
+                      trans && "scale-[1.8]"
+                    } flex gap-x-12 items-center transition-all origin-top-left relative -top-32 right-24 max-sm:top-60`}
                   >
                     <div className="mb-6 max-sm:w-20">
                       <img
@@ -86,7 +84,7 @@ const Artist = () => {
                     </div>
 
                     <button
-                      className="absolute lg:right-10 xl:right-28 2xl:right-28 top-0 max-sm:-top-8 text-white bg-[#A59719] font-medium rounded-lg text-xs px-2 py-1 text-center mr-2 mb-2 max-sm:text-[5px] "
+                      className="absolute lg:right-10 xl:right-28 2xl:right-28 top-0 max-sm:-top-8 text-white bg-pulsar font-medium rounded-lg text-xs px-2 py-1 text-center mr-2 mb-2 max-sm:text-[5px] "
                       onClick={() => {
                         setTrans(false);
                         setUser(null);
@@ -95,7 +93,7 @@ const Artist = () => {
                       {artistText}
                     </button>
                     {trans && (
-                      <div className="flex flex-col text-[6px] lg:text-[9px] xl:text-[10px] gap-y-10 max-sm:gap-y-1 relative max-sm:-top-6 max-sm:-left-9 max-sm:text-[5px] text-[#A59719] max-sm:w-12">
+                      <div className="flex flex-col text-[6px] lg:text-[9px] xl:text-[10px] gap-y-10 max-sm:gap-y-1 relative max-sm:-top-6 max-sm:-left-9 max-sm:text-[5px] text-pulsar max-sm:w-12">
                         <div className="text-left max-sm:leading-[5px] max-sm:w-20 ">
                           {user.role.toUpperCase()}:{" "}
                           {user.nameAndSurname.toUpperCase()}
@@ -107,7 +105,8 @@ const Artist = () => {
                           onClick={() => setPage(2)}
                           src={downArrow}
                           alt="downArrow"
-                          className="sm:w-8 h-8 max-sm:w-4 max-sm:h-4 max-sm:top-2 max-sm:left-2 object-contain cursor-pointer" />
+                          className="sm:w-8 h-8 max-sm:w-4 max-sm:h-4 max-sm:top-2 max-sm:left-2 object-contain cursor-pointer"
+                        />
                       </div>
                     )}
                   </div>
@@ -121,43 +120,46 @@ const Artist = () => {
               >
                 <section className="flex justify-between flex-wrap gap-x-6 relative max-sm:top-40">
                   <button
-                    className="absolute right-6 -top-24 max-sm:top-24 max-sm:right-12 text-white bg-[#A59719] font-medium rounded-lg text-sm px-3 py-2 text-center mr-2 mb-2"
+                    className="absolute right-6 -top-24 max-sm:top-24 max-sm:right-12 text-white bg-pulsar font-medium rounded-lg text-sm px-3 py-2 text-center mr-2 mb-2"
                     onClick={() => setPage(1)}
                   >
                     {goBack}
                   </button>
                   {user.role === "Sound Engineer"
                     ? user.projects.map((project, index) => {
-                      return (
-                        <div className="max-sm:relative max-sm:-left-32 max-sm:w-52" key={index}>
-                          <SpotifyPlayer
-                            uri={project}
-                            size={size}
-                            view={view}
-                            theme={theme}
-                          />
-                        </div>
-                      );
-                    })
+                        return (
+                          <div
+                            className="max-sm:relative max-sm:-left-32 max-sm:w-52"
+                            key={index}
+                          >
+                            <SpotifyPlayer
+                              uri={project}
+                              size={size}
+                              view={view}
+                              theme={theme}
+                            />
+                          </div>
+                        );
+                      })
                     : user.projects.map((project, index) => {
-                      return (
-                        <div key={index}>
-                          <img
-                            className="w-52 h-52 object-contain max-sm:w-24 max-sm:h-24 max-sm:mb-12 max-sm:relative max-sm:-left-32"
-                            src={project}
-                            alt="IMAGE"
-                          />
-                        </div>
-                      );
-                    })}
+                        return (
+                          <div key={index}>
+                            <img
+                              className="w-52 h-52 object-contain max-sm:w-24 max-sm:h-24 max-sm:mb-12 max-sm:relative max-sm:-left-32"
+                              src={project}
+                              alt="IMAGE"
+                            />
+                          </div>
+                        );
+                      })}
                   <img
                     onClick={() => setPage(1)}
                     src={upArrow}
                     alt="upArrow"
-                    className="sm:w-16 h-16 max-sm:w-4 max-sm:h-4 max-sm:top-2 max-sm:left-2 object-contain cursor-pointer" />
+                    className="sm:w-16 h-16 max-sm:w-4 max-sm:h-4 max-sm:top-2 max-sm:left-2 object-contain cursor-pointer"
+                  />
                 </section>
               </CSSTransition>
-
             </div>
           ) : (
             <div className="max-sm:grid max-sm:grid-cols-2 max-sm:w-72 max-sm:absolute max-sm:right-10 lg:flex flex-wrap lg:gap-5 max-sm:gap-4">

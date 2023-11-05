@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "pulsar": "#a59719",
+      },
+    },
     screens: {
       sm: "640px",
       md: "768px",
