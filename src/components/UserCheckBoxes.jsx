@@ -28,8 +28,8 @@ export const CheckboxImage = ({ imageUrl, onToggle, id, artist }) => {
         alt="Resim"
         className={
           isChecked
-            ? "w-40 min-w-40 h-52 max-sm:w-24 max-sm:min-w-24 max-sm:h-32 object-cover mr-4 cursor-pointer opacity-75 transition-all bg-[#A59719]"
-            : "w-40 min-w-40 h-52 max-sm:w-24 max-sm:min-w-24 max-sm:h-32 object-cover mr-4 cursor-pointer transition-all bg-[#A59719]"
+            ? "w-40 min-w-40 h-52 max-sm:w-24 max-sm:min-w-24 max-sm:h-32 object-cover mr-4 cursor-pointer opacity-75 transition-all bg-pulsar"
+            : "w-40 min-w-40 h-52 max-sm:w-24 max-sm:min-w-24 max-sm:h-32 object-cover mr-4 cursor-pointer transition-all bg-pulsar"
         }
         onClick={toggleCheckbox}
       />

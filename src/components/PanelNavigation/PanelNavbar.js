@@ -27,13 +27,13 @@ export default function PanelNavbar({
             <div className='flex gap-x-6 justify-between items-center'>
                 <p
                     onClick={() => navigation(addTitleFunction)}
-                    className='lg:text-2xl font-light relative  cursor-pointer hover:border-b-4 border-[#A59719]'>{addTitle}</p>
+                    className='lg:text-2xl font-light relative  cursor-pointer hover:border-b-4 border-pulsar'>{addTitle}</p>
                 <p
                     onClick={() => navigation(updateTitleFunction)}
-                    className='lg:text-2xl font-light relative  cursor-pointer hover:border-b-4 border-[#A59719]'>{updateTitle}</p>
+                    className='lg:text-2xl font-light relative  cursor-pointer hover:border-b-4 border-pulsar'>{updateTitle}</p>
                 <p
                     onClick={() => navigation(deleteTitleFunction)}
-                    className='lg:text-2xl font-light relative  cursor-pointer hover:border-b-4 border-[#A59719]'>{deleteTitle}</p>
+                    className='lg:text-2xl font-light relative  cursor-pointer hover:border-b-4 border-pulsar'>{deleteTitle}</p>
                 <p
                     onClick={logOutFunction}
                     className='lg:text-2xl font-light text-red-600 relative cursor-pointer hover:border-b-4 border-red-500'>{logOutTitle}</p>
