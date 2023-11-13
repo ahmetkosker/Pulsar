@@ -37,6 +37,8 @@ export default function ShowProjects({
     return <LoadingComponent />;
   }
 
+  console.log(projects)
+
   return (
     <div className="flex justify-start flex-wrap relative bottom-12 gap-y-12 w-5/6 sm:ml-36 ml-12 gap-x-12 sm:pt-36 text-center font-extrabold sm:text-xl text-xs pt-36 xl:pt-20 pr-12 xl:pr-0">
       {isHomePage !== undefined

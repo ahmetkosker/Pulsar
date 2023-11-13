@@ -19,7 +19,7 @@ import DeleteProject from "./pages/AdminPanel/PanelProjects/DeleteProject";
 import UpdateProject from "./pages/AdminPanel/PanelProjects/UpdateProject";
 import ManageBlogs from "./pages/AdminPanel/PanelBlogs/ManageBlogs";
 import DeleteBlog from "./pages/AdminPanel/PanelBlogs/DeleteBlog";
-import UpdateBlog from "./pages/AdminPanel/PanelBlogs/UpdateBlog";
+import BlogUpdate from "./pages/AdminPanel/PanelBlogs/UpdateBlog";
 
 function App() {
   return (
@@ -46,7 +46,7 @@ function App() {
               <Route path="/manage-projects/deleteProject" element={<DeleteProject />} />
               <Route path="/manage-blogs" element={<ManageBlogs />} />
               <Route path="/manage-blogs/addBlog" element={<AddBlog />} />
-              <Route path="/manage-blogs/updateBlog" element={<UpdateBlog />} />
+              <Route path="/manage-blogs/updateBlog" element={<BlogUpdate />} />
               <Route path="/manage-blogs/deleteBlog" element={<DeleteBlog />} />
             </Routes>
           </div>

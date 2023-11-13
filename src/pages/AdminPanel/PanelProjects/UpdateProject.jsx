@@ -35,7 +35,8 @@ export default function PanelUpdate() {
             artistName: returnSelectedProjectForm.artistName,
             artistJobTitle: returnSelectedProjectForm.artistJobTitle,
             projectImage: returnSelectedProjectForm.projectImage,
-            features: projectValue
+            features: projectValue,
+            projectLink: returnSelectedProjectForm.projectLink
         })
             .then((res) => {
                 console.log(res)
@@ -78,7 +79,7 @@ export default function PanelUpdate() {
                     {returnSelectedProjectForm === null
                         ? <LoadingComponent />
                         :
-                        <div className='flex justify-start items-center flex-col w-full h-screen relative top-8'>
+                        <div className='flex justify-start items-center flex-col w-full h-screen relative top-8 px-8 py-8 overflow-auto'>
                             <h2 className="text-2xl font-semibold mb-8">Update Project</h2>
                             <div className='flex justify-center items-center flex-row'>
                                 <p className='font-light text-xl'>Project Name: </p>
@@ -89,7 +90,16 @@ export default function PanelUpdate() {
                                     placeholder={"Artist Name"}
                                     className='border-2 border-black rounded-lg mx-4 w-96 py-2 px-2' />
                             </div>
-                            <div className='flex justify-center items-center flex-row w-full mt-4'>
+                            <div className='flex justify-center items-center flex-row my-4 ml-4'>
+                                <p className='font-light text-xl'>Project URL: </p>
+                                <input
+                                    value={returnSelectedProjectForm.projectLink}
+                                    onChange={(e) => setReturnSelectedProjectFrom({ ...returnSelectedProjectForm, projectLink: e.target.value })}
+                                    type='text'
+                                    placeholder={"Project URL"}
+                                    className='border-2 border-black rounded-lg mx-4 w-96 py-2 px-2' />
+                            </div>
+                            <div className='flex justify-center items-center flex-row w-full mt-4 ml-16'>
                                 <p className='font-light text-xl'>Title: </p>
                                 <textarea
                                     id="details"
@@ -101,7 +111,7 @@ export default function PanelUpdate() {
                             </div>
                             {projectValue.map((project, index) => {
                                 return <div className='flex justify-center items-center flex-row mt-4'>
-                                    <p className='font-light text-xl mr-4'>Project {index + 1}: </p>
+                                    <p className='font-light text-xl mr-4'>Artist {index + 1}: </p>
                                     <div className='flex justify-center items-center py-4 px-4 w-fit h-16 rounded-lg bg-slate-200'>
                                         <p className='text-justify'>{project}</p>
                                     </div>
@@ -117,7 +127,7 @@ export default function PanelUpdate() {
                                 ?
                                 <div className='flex justify-center items-center flex-col'>
                                     <div className='flex justify-center items-center flex-row my-24 relative right-2'>
-                                        <p className='font-light text-xl relative right-1'>New Project: </p>
+                                        <p className='font-light text-xl relative right-1'>New Artist: </p>
                                         <input
                                             value={valueToArray}
                                             onChange={(e) => setValueToArray(e.target.value)}

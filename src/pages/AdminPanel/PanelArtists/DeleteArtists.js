@@ -12,6 +12,7 @@ export default function DeleteArtists() {
     const [selectedArtistName, setSelectedArtistName] = useState(null)
     const [isModalOpen, setModalOpen] = useState(false);
     const [loading, setLoading] = useState(false)
+    const [projects, setProjects] = useState(null);
 
     const openModal = () => {
         setModalOpen(true);
@@ -78,6 +79,7 @@ export default function DeleteArtists() {
                     setSelectedArtistName={setSelectedArtistName}
                     selectedArtistID={selectedArtistID}
                     setSelectedArtistID={setSelectedArtistID}
+                    setProjectValue={setProjects}
                 />
             </div >
         </>

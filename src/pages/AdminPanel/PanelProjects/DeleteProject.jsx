@@ -11,6 +11,7 @@ export default function DeleteProject() {
     const [selectedProjectName, setSelectedProjectName] = useState(null)
     const [isModalOpen, setModalOpen] = useState(false);
     const [loading, setLoading] = useState(false)
+    const [projects, setProjects] = useState(null);
 
     const openModal = () => {
         setModalOpen(true);
@@ -75,6 +76,7 @@ export default function DeleteProject() {
                     setSelectedProjectID={setSelectedProjectID}
                     setSelectedProjectName={setSelectedProjectName}
                     openModal={openModal}
+                    setProjectValue={setProjects}
                 />
             </div >
         </>

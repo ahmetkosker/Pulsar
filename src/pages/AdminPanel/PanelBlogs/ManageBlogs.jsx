@@ -16,7 +16,9 @@ export default function ManageBlogs() {
                 deleteTitle={"Delete Blog"}
                 deleteTitleFunction={"/manage-blogs/deleteBlog"}
             />
-            <ShowBlogs />
+            <ShowBlogs
+                isHomePage={true}
+            />
         </>
     )
 }

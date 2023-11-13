@@ -8,9 +8,11 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PanelNavbar from "../../../components/PanelNavigation/PanelNavbar";
+import Lottie from "lottie-react";
 function AddBlog() {
   const storage = getStorage(app);
   const [image, setImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigate();
 
   const chechAuthenticate = () => {
@@ -52,6 +54,7 @@ function AddBlog() {
   };
 
   const handleSubmit = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
 
     let imageToDB = "";
@@ -70,6 +73,7 @@ function AddBlog() {
         blogPostAuthor: formData.blogPostAuthor,
       })
       .then((res) => {
+        setIsLoading(false);
         toast.success("Blog yazısı başarıyla eklendi!");
         setTimeout(() => {
           navigation("/panelHomepage");
@@ -140,12 +144,21 @@ function AddBlog() {
               className="border p-2 w-full rounded-md"
             />
           </div>
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700"
-          >
-            Yazıyı Paylaş
-          </button>
+          {isLoading
+            ?
+            <div className="mt-10 w-24 h-10 rounded-lg flex justify-center items-center bg-blue-700">
+              <Lottie
+                className="w-32 h-32 object-contain"
+                animationData={require("../../../components/loadingAnimation.json")} />
+            </div>
+            :
+            <div className="flex flex-row justify-start mt-10 items-center">
+              <button
+                type="submit"
+                className="text-white mt-10 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >Submit</button>
+            </div>
+          }
         </form>
       </div>
     </>
