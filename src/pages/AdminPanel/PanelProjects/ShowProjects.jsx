@@ -8,6 +8,8 @@ export default function ShowProjects({
   returnsetSelectedProjectForm,
   openModal,
   isHomePage,
+  setProjectValue,
+  projectValue
 }) {
   const [projects, setProjects] = useState(null);
 
@@ -71,9 +73,9 @@ export default function ShowProjects({
               <div
                 onClick={() => [
                   setSelectedProjectID(project.docID),
-                  ,
                   setSelectedProjectName(project.docData.artistName),
                   getSelectedProject(project.docID),
+                  setProjectValue(project.docData.features),
                   openModal(),
                 ]}
                 key={project.docID}

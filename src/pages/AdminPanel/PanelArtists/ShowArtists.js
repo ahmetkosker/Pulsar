@@ -11,7 +11,9 @@ export default function ShowArtists({
     closeModal,
     returnselectedArtistForm,
     returnsetSelectedArtistForm,
-    isHomePage
+    isHomePage,
+    setProjectValue,
+    projectValue
 }) {
     const [artists, setArtists] = useState(null)
 
@@ -72,6 +74,7 @@ export default function ShowArtists({
                             setSelectedArtistID(artist.docID),
                             setSelectedArtistName(artist.docData.nameAndSurname),
                             getSelectedArtist(artist.docID),
+                            setProjectValue(artist.docData.projects),
                             openModal(),
                         ]}
                         key={artist.docID}
