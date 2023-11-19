@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { CheckboxImage } from "../components/UserCheckBoxes";
 import axios from "axios";
 import LoadingComponent from "../components/LoadingComponent";
+import { contactPhoneNumber } from "../configs/simpleFunctions";
 
 const Artist = () => {
   const navigate = useNavigate();
@@ -145,7 +146,8 @@ const Artist = () => {
           />
 
           <div className="3xl:w-96 3xl:text-3xl w-60 text-xl font-bold max-sm:text-sm max-sm:w-32">
-            +90 <span className="text-pulsar">545</span> 312 60 30
+            {contactPhoneNumber}
+            {/* +90 <span className="text-pulsar">545</span> 312 60 30 */}
           </div>
         </div>
       </section>

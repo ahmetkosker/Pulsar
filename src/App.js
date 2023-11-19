@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -20,8 +20,11 @@ import UpdateProject from "./pages/AdminPanel/PanelProjects/UpdateProject";
 import ManageBlogs from "./pages/AdminPanel/PanelBlogs/ManageBlogs";
 import DeleteBlog from "./pages/AdminPanel/PanelBlogs/DeleteBlog";
 import BlogUpdate from "./pages/AdminPanel/PanelBlogs/UpdateBlog";
+import { getAboutTitle } from "./configs/simpleFunctions";
+import UpdateStaticFields from "./pages/AdminPanel/PanelMain/UpdateStaticFields";
 
 function App() {
+  useEffect(() => { getAboutTitle() }, [])
   return (
     <div className="min-h-screen">
       <BrowserRouter>
@@ -36,6 +39,7 @@ function App() {
               <Route path="/blogs" element={<Blogs />} />
               <Route path="/adminpanel" element={<PanelLogin />} />
               <Route path="/panelHomepage" element={<PanelHomepage />} />
+              <Route path="/panelHomepage/updateStaticFields" element={<UpdateStaticFields />} />
               <Route path="/manage-artists" element={<ManageArtists />} />
               <Route path="/manage-artists/addArtist" element={<AddArtist />} />
               <Route path="/manage-artists/panelUpdate" element={<PanelUpdate />} />

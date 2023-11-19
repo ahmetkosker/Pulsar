@@ -1,5 +1,5 @@
 import { doc, getDoc } from "firebase/firestore";
-import { app, auth, db } from "./firebaseConfig";
+import { db } from "./firebaseConfig";
 
 export let aboutTitle = "";
 export let contactPhoneNumber = "";

@@ -1,6 +1,6 @@
 import React from "react";
 import { BsInstagram } from "react-icons/bs";
-import { instagramLink } from "../../configs/simpleFunctions";
+import { footerTitle, instagramLink } from "../../configs/simpleFunctions";
 
 const Footer = () => {
   return (
@@ -10,7 +10,7 @@ const Footer = () => {
         className="text-3xl my-4 cursor-pointer absolute -left-4"
       />
       <p className="font-extrabold sm:text-lg text-xs">
-        ANKARA BASED MUSIC COLLECTIVE
+        {footerTitle}
       </p>
     </footer>
   );
