@@ -51,6 +51,11 @@ export default function PanelHomepage() {
                 logOutFunction={logoutFunction}
             />
             <div className='flex w-full h-screen justify-center items-center flex-col'>
+                <p
+                    onClick={() => navigation('/panelHomepage/updateStaticFields')}
+                    className='bottom-96 lg:text-2xl font-light relative cursor-pointer hover:border-b-4 border-pulsar'>
+                    Update Static Fields
+                </p>
                 <Lottie
                     animationData={wave}
                     autoPlay
