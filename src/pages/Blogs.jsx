@@ -56,22 +56,22 @@ const Blogs = () => {
   if (allBlogs === null) return <LoadingComponent />;
 
   return (
-    <main className="w-full h-auto px-5 mb-24">
-      <section className="max-w-full sm:mt-20 mt-12 flex justify-between">
+    <main className="w-screen h-auto px-5 mb-24 overflow-x-hidden">
+      <section className="w-screen sm:mt-20 mt-12 flex justify-between">
         <Aside />
         <img
           className="absolute left-0 right-0 mx-auto w-1/3"
           src="/images/BG.png"
           alt="BG"
         />
-        <div className="flex flex-col w-full items-center relative right-10 gap-y-5 xl:gap-y-7 2xl:gap-y-12  ml-3">
+        <div className="flex flex-col w-full items-center relative sm:right-10 right-20 gap-y-5 xl:gap-y-7 2xl:gap-y-12 ml-3">
           {allBlogs.map((blog, index) => {
             return (
               <div
                 className={`${
                   test === index
-                    ? "scale-110 sm:h-80 h-64 sm:w-3/5 w-4/5 lg:h-96"
-                    : "sm:h-32 h-20 sm:w-3/5 w-full"
+                    ? "scale-110 sm:h-80 h-64 sm:w-3/5 w-3/5 lg:h-96 mt-4"
+                    : "sm:h-32 h-20 sm:w-3/5 w-3/5"
                 }  relative origin-bottom-right transition-all ease-in overflow-hidden bg-[#D9D9D9] opacity-80 py-2 px-2 sm:py-5 sm:px-7 rounded-2xl mt-2 flex flex-col ml-14 sm:ml-0`}
               >
                 <div

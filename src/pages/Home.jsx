@@ -1,12 +1,16 @@
 import Footer from "../components/Footer/Footer";
-import React from "react";
+import React, { useEffect } from "react";
 import Aside from "../components/Home/Aside";
 import Lottie from "lottie-react";
 import wave from "../components/pulsaranimation.json";
+import { getAboutTitle } from "../configs/simpleFunctions";
 
 const Home = () => {
+
+  useEffect(() => { getAboutTitle() }, [])
+
   return (
-    <main className="w-full h-full px-5">
+    <main className="w-screen h-screen overflow-hidden px-5">
       <section className="max-w-full sm:mt-20 mt-12 flex justify-between">
         <Aside />
         <div>
@@ -17,7 +21,7 @@ const Home = () => {
         <Lottie
           animationData={wave}
           autoPlay
-          className="w-screen absolute -z-50 mx-auto left-0 right-0 bottom-0"
+          className="w-screen absolute -z-50 mx-auto left-0 right-0 bottom-5 sm:bottom-0"
         />
       </div>
       <Footer />
