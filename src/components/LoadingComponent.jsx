@@ -8,7 +8,7 @@ export default function LoadingComponent() {
         className="w-32 h-32 object-contain"
         animationData={require("./loadingAnimation.json")}
       />
-      Loading...
+      Yükleniyor...
     </main>
   );
 }

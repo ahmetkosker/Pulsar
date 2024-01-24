@@ -40,11 +40,11 @@ const Projects = () => {
                   <img
                     src={project.docData.projectImage}
                     alt="artist"
-                    className="w-36 h-36 xl:w-60 xl:h-60 rounded-t-3xl group-hover:translate-y-0.5 transition-all object-cover"
+                    className="w-44 h-36 xl:w-60 xl:h-60 rounded-t-3xl group-hover:translate-y-0.5 transition-all object-cover"
                   />
                 </div>
 
-                <div className="w-36 xl:w-60 xl:mt-5 mt-2 group-hover:mt-0 xl:pt-9 pt-2 group-hover:pt-9 xl:group-hover:pt-10 duration-500 text-[8px] xl:text-lg group-hover:h-auto pb-3 xl:group-hover:h-60 overflow-hidden h-16 xl:h-32 bg-pulsar transition-opacity rounded-b-3xl text-white text-left px-3">
+                <div className="w-44 xl:w-60 xl:mt-5 mt-2 group-hover:mt-0 xl:pt-9 pt-2 group-hover:pt-9 xl:group-hover:pt-10 duration-500 text-[8px] xl:text-lg group-hover:h-auto pb-3 xl:group-hover:h-60 overflow-hidden h-16 xl:h-32 bg-pulsar transition-opacity rounded-b-3xl text-white text-left px-3">
                   <div className="group-hover:translate-x-3 xl:group-hover:translate-x-4 group-hover:-translate-y-7 w-48 transition-all duration-500">
                     {project.docData.artistName} -{" "}
                     {project.docData.artistJobTitle}
